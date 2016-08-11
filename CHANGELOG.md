@@ -1,2 +1,2 @@
-1.0.0 August X, 2016
+1.0.2 August 11, 2016
   - Initial Release
