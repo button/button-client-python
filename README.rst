@@ -144,6 +144,8 @@ Contributing
 ------------
 
 -  Building the egg: ``python setup.py bdist_egg``
+-  Building the wheel: ``python setup.py bdist_wheel --universal``
+-  Building the sdist: ``python setup.py sdist``
 -  Installing locally: ``python setup.py install``
 -  Running tests: ``python setup.py test``
 -  Running lint: ``flake8``
