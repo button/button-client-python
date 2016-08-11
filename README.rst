@@ -74,7 +74,7 @@ Orders
 ~~~~~~
 
 **n.b: all currency values should be reported in the smallest possible
-unit of that denomination, i.e. $1.00 should be reported as ``100``
+unit of that denomination, i.e. $1.00 should be reported as 100
 (i.e. 100 pennies)**
 
 Create
