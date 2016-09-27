@@ -65,6 +65,27 @@ instance:
     print(response.to_dict())
     # {'status': open, 'btn_ref': None, 'line_items': [], ...}
 
+Configuration
+---------
+
+You may optionally supply a config argument with your API key:
+
+.. code:: python
+
+  client = Client("sk-XXX", {
+    'hostname': 'api.testsite.com',
+    'port': 80,
+    'secure': False,
+    'timeout': 5
+  })
+
+The supported options are as follows:
+
+* ``hostname``: Defaults to ``api.usebutton.com``.
+* ``port``: Defaults to ``443`` if ``config.secure``, else defaults to ``80``.
+* ``secure``: Whether or not to use HTTPS.  Defaults to ``True``.  **N.B: Button's API is only exposed through HTTPS.  This option is provided purely as a convenience for testing and development.**
+* ``timeout``: The time in seconds that may elapse before network requests abort.  Defaults to ``None``.
+
 Resources
 ---------
 
