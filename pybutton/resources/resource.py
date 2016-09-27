@@ -31,10 +31,9 @@ class Resource(object):
 
     '''
 
-    API_BASE = 'https://api.usebutton.com'
-
-    def __init__(self, api_key):
+    def __init__(self, api_key, config):
         self.api_key = api_key
+        self.config = config
 
     def api_get(self, path):
         '''Make an HTTP GET request
@@ -91,7 +90,8 @@ class Resource(object):
 
         '''
 
-        url = '{0}{1}'.format(self.API_BASE, path)
+        url = self._request_url(path)
+
         api_key_bytes = '{0}:'.format(self.api_key).encode()
         authorization = b64encode(api_key_bytes).decode()
 
@@ -101,7 +101,7 @@ class Resource(object):
         }
 
         try:
-            resp = request(url, method, headers, data).get('object', {})
+            resp = request(url, method, headers, data, self.config['timeout']).get('object', {})
             return Response(resp)
         except HTTPError as e:
             response = e.read()
@@ -115,3 +115,7 @@ class Resource(object):
             error = json.loads(data).get('error', {})
             message = error.get('message', fallback)
             raise ButtonClientError(message)
+
+    def _request_url(self, path):
+        protocol = 'https://' if self.config['secure'] else 'http://'
+        return '{0}{1}:{2}{3}'.format(protocol, self.config['hostname'], self.config['port'], path)

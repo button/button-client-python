@@ -21,7 +21,7 @@ if sys.version_info[0] == 3:
     from urllib.request import urlopen
     from urllib.error import HTTPError
 
-    def request(url, method, headers, data=None):
+    def request(url, method, headers, data=None, timeout=None):
         ''' Make an HTTP request in Python 3.x
 
         This method will abstract the underlying organization and invocation of
@@ -50,7 +50,7 @@ if sys.version_info[0] == 3:
         if data:
             request.add_header('Content-Type', 'application/json')
 
-        response = urlopen(request).read().decode('utf8')
+        response = urlopen(request, timeout=timeout).read().decode('utf8')
 
         try:
             return json.loads(response)
@@ -64,7 +64,7 @@ else:
     from urllib2 import urlopen
     from urllib2 import HTTPError
 
-    def request(url, method, headers, data=None):
+    def request(url, method, headers, data=None, timeout=None):
         ''' Make an HTTP request in Python 2.x
 
         This method will abstract the underlying organization and invocation of
@@ -96,7 +96,7 @@ else:
             request.add_header('Content-Type', 'application/json')
             request.add_data(json.dumps(data))
 
-        response = urlopen(request).read()
+        response = urlopen(request, timeout=timeout).read()
 
         try:
             return json.loads(response)
