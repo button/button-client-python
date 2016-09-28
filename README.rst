@@ -66,17 +66,19 @@ instance:
     # {'status': open, 'btn_ref': None, 'line_items': [], ...}
 
 Configuration
----------
+-------------
 
 You may optionally supply a config argument with your API key:
 
 .. code:: python
 
+  from pybutton import Client
+
   client = Client("sk-XXX", {
     'hostname': 'api.testsite.com',
     'port': 80,
     'secure': False,
-    'timeout': 5
+    'timeout': 5 # seconds
   })
 
 The supported options are as follows:
