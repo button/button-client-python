@@ -6,12 +6,12 @@ from __future__ import unicode_literals
 from base64 import b64encode
 from platform import python_version
 import json
-import urlparse
 
 from ..response import Response
 from ..error import ButtonClientError
 from ..version import VERSION
 from ..request import request
+from ..request import request_url
 from ..request import HTTPError
 
 USER_AGENT = 'pybutton/{0} python/{1}'.format(VERSION, python_version())
@@ -98,8 +98,7 @@ class Resource(object):
 
         '''
 
-        url = self._request_url(path)
-
+        url = request_url(self.config['secure'], self.config['hostname'], self.config['port'], path)
         api_key_bytes = '{0}:'.format(self.api_key).encode()
         authorization = b64encode(api_key_bytes).decode()
 
@@ -123,7 +122,3 @@ class Resource(object):
             error = json.loads(data).get('error', {})
             message = error.get('message', fallback)
             raise ButtonClientError(message)
-
-    def _request_url(self, path):
-        protocol = 'https' if self.config['secure'] else 'http'
-        return urlparse.urlunsplit((protocol, '{0}:{1}'.format(self.config['hostname'], self.config['port']), path, '', ''))

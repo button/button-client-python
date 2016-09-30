@@ -166,16 +166,3 @@ class ResourceTestCase(TestCase):
         self.assertTrue(len(args[2]['User-Agent']) != 0)
         self.assertEqual(args[2]['Authorization'], 'Basic c2stWFhYOg==')
         self.assertEqual(args[3], None)
-
-    def test_request_url(self):
-        resource = Resource('sk-XXX', config)
-        path = resource._request_url('/v1/api/btnorder-XXX')
-        self.assertEqual(path, 'https://api.usebutton.com:443/v1/api/btnorder-XXX')
-
-        resource = Resource('sk-XXX', {
-            'hostname': 'localhost',
-            'port': 80,
-            'secure': False
-        })
-        path = resource._request_url('/v1/api/btnorder-XXX')
-        self.assertEqual(path, 'http://localhost:80/v1/api/btnorder-XXX')
