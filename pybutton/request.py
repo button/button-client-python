@@ -20,6 +20,10 @@ if sys.version_info[0] == 3:
     from urllib.request import Request
     from urllib.request import urlopen
     from urllib.error import HTTPError
+    from urllib.parse import urlencode
+    from urllib.parse import urlparse
+    from urllib.parse import urlunsplit
+    from urllib.parse import parse_qs
 
     def request(url, method, headers, data=None, timeout=None):
         ''' Make an HTTP request in Python 3.x
@@ -57,12 +61,23 @@ if sys.version_info[0] == 3:
         except ValueError:
             raise ButtonClientError('Invalid response: {0}'.format(response))
 
-    __all__ = [Request, urlopen, HTTPError, request]
+    def request_url(secure, hostname, port, path, query=None):
+        '''Combines url components into a url passable into the request function.'''
+        query = urlencode(query) if query else ''
+        scheme = 'https' if secure else 'http'
+        netloc = '{0}:{1}'.format(hostname, port)
+        return urlunsplit((scheme, netloc, path, query, ''))
+
+    __all__ = [Request, urlopen, HTTPError, request, request_url, urlparse, parse_qs]
 
 else:
     from urllib2 import Request
     from urllib2 import urlopen
     from urllib2 import HTTPError
+    from urllib import urlencode
+    from urlparse import urlparse
+    from urlparse import urlunsplit
+    from urlparse import parse_qs
 
     def request(url, method, headers, data=None, timeout=None):
         ''' Make an HTTP request in Python 2.x
@@ -103,4 +118,11 @@ else:
         except ValueError:
             raise ButtonClientError('Invalid response: {0}'.format(response))
 
-    __all__ = [Request, urlopen, HTTPError, request]
+    def request_url(secure, hostname, port, path, query=None):
+        '''Combines url components into a url passable into the request function.'''
+        query = urlencode(query) if query else ''
+        scheme = 'https' if secure else 'http'
+        netloc = '{0}:{1}'.format(hostname, port)
+        return urlunsplit((scheme, netloc, path, query, ''))
+
+    __all__ = [Request, urlopen, HTTPError, request, request_url, urlparse, parse_qs]

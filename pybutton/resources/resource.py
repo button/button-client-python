@@ -6,12 +6,13 @@ from __future__ import unicode_literals
 from base64 import b64encode
 from platform import python_version
 import json
-import urlparse
+import sys
 
 from ..response import Response
 from ..error import ButtonClientError
 from ..version import VERSION
 from ..request import request
+from ..request import request_url
 from ..request import HTTPError
 
 USER_AGENT = 'pybutton/{0} python/{1}'.format(VERSION, python_version())
@@ -43,7 +44,7 @@ class Resource(object):
         self.api_key = api_key
         self.config = config
 
-    def api_get(self, path):
+    def api_get(self, path, query=None):
         '''Make an HTTP GET request
 
         Args:
@@ -53,7 +54,7 @@ class Resource(object):
             (pybutton.Response): The API response
 
         '''
-        return self._api_request(path, 'GET')
+        return self._api_request(path, 'GET', query=query)
 
     def api_post(self, path, data):
         '''Make an HTTP POST request
@@ -80,7 +81,7 @@ class Resource(object):
         '''
         return self._api_request(path, 'DELETE')
 
-    def _api_request(self, path, method, data=None):
+    def _api_request(self, path, method, data=None, query=None):
         '''Make an HTTP request
 
         Any data provided will be JSON encoded an included as part of the
@@ -98,7 +99,9 @@ class Resource(object):
 
         '''
 
-        url = self._request_url(path)
+        url = request_url(self.config['secure'], self.config['hostname'], self.config['port'], path, query)
+
+        print(url)
 
         api_key_bytes = '{0}:'.format(self.api_key).encode()
         authorization = b64encode(api_key_bytes).decode()
@@ -109,8 +112,8 @@ class Resource(object):
         }
 
         try:
-            resp = request(url, method, headers, data, self.config['timeout']).get('object', {})
-            return Response(resp)
+            resp = request(url, method, headers, data, self.config['timeout'])
+            return Response(resp.get('meta', {}), resp.get('object', resp.get('objects')))
         except HTTPError as e:
             response = e.read()
             fallback = '{0} {1}'.format(e.code, e.msg)
@@ -123,7 +126,3 @@ class Resource(object):
             error = json.loads(data).get('error', {})
             message = error.get('message', fallback)
             raise ButtonClientError(message)
-
-    def _request_url(self, path):
-        protocol = 'https' if self.config['secure'] else 'http'
-        return urlparse.urlunsplit((protocol, '{0}:{1}'.format(self.config['hostname'], self.config['port']), path, '', ''))

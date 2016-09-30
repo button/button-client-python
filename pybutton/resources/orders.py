@@ -12,6 +12,12 @@ class Orders(Resource):
     Args:
         api_key (string): Your organization's API key.  Do find yours at
             https://app.usebutton.com/settings/organization.
+        config (dict): Configuration options for the client. Options include:
+            hostname: Defaults to api.usebutton.com.
+            port: Defaults to 443 if config.secure, else defaults to 80.
+            secure: Whether or not to use HTTPS. Defaults to True.
+            timeout: The time in seconds for network requests to abort. Defaults to None.
+              (N.B: Button's API is only exposed through HTTPS. This option is provided purely as a convenience for testing and development.)
 
     Raises:
         pybutton.ButtonClientError
