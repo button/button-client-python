@@ -43,31 +43,31 @@ class ClientTestCase(TestCase):
             'hostname': 'api.usebutton.com',
             'port': 443,
             'secure': True,
-            'timeout': None
+            'timeout': None,
         })
 
         # Port and timeout overrides
         config = config_with_defaults({
             'port': 88,
-            'timeout': 5
+            'timeout': 5,
         })
 
         self.assertEqual(config, {
             'hostname': 'api.usebutton.com',
             'port': 88,
             'secure': True,
-            'timeout': 5
+            'timeout': 5,
         })
 
         # Hostname and secure overrides
         config = config_with_defaults({
             'hostname': 'localhost',
-            'secure': False
+            'secure': False,
         })
 
         self.assertEqual(config, {
             'hostname': 'localhost',
             'port': 80,
             'secure': False,
-            'timeout': None
+            'timeout': None,
         })

@@ -58,5 +58,5 @@ def config_with_defaults(config):
         'secure': secure,
         'timeout': config.get('timeout'),
         'hostname': config.get('hostname', 'api.usebutton.com'),
-        'port': config.get('port', defaultPort)
+        'port': config.get('port', defaultPort),
     }
