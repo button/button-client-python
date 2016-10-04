@@ -59,7 +59,9 @@ if sys.version_info[0] == 3:
             raise ButtonClientError('Invalid response: {0}'.format(response))
 
     def request_url(secure, hostname, port, path):
-        '''Combines url components into a url passable into the request function.'''
+        ''' Combines url components into a url passable into the request
+        function. '''
+
         scheme = 'https' if secure else 'http'
         netloc = '{0}:{1}'.format(hostname, port)
 
@@ -113,7 +115,8 @@ else:
             raise ButtonClientError('Invalid response: {0}'.format(response))
 
     def request_url(secure, hostname, port, path):
-        '''Combines url components into a url passable into the request function.'''
+        ''' Combines url components into a url passable into the request
+        function. '''
         scheme = 'https' if secure else 'http'
         netloc = '{0}:{1}'.format(hostname, port)
 

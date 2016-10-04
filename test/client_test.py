@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 from unittest import TestCase
 
 from pybutton.client import Client
-from pybutton.client import _config_with_defaults
+from pybutton.client import config_with_defaults
 from pybutton import ButtonClientError
 
 
@@ -37,7 +37,7 @@ class ClientTestCase(TestCase):
 
     def test_config(self):
         # Defaults
-        config = _config_with_defaults({})
+        config = config_with_defaults({})
 
         self.assertEqual(config, {
             'hostname': 'api.usebutton.com',
@@ -47,7 +47,7 @@ class ClientTestCase(TestCase):
         })
 
         # Port and timeout overrides
-        config = _config_with_defaults({
+        config = config_with_defaults({
             'port': 88,
             'timeout': 5
         })
@@ -60,7 +60,7 @@ class ClientTestCase(TestCase):
         })
 
         # Hostname and secure overrides
-        config = _config_with_defaults({
+        config = config_with_defaults({
             'hostname': 'localhost',
             'secure': False
         })

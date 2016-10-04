@@ -18,6 +18,7 @@ config = {
     'timeout': None
 }
 
+
 class ResourceTestCase(TestCase):
 
     @patch('pybutton.resources.resource.request')
