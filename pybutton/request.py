@@ -105,8 +105,18 @@ else:
 
 
 def request_url(secure, hostname, port, path):
-    ''' Combines url components into a url passable into the request
-    function. '''
+    '''
+        Combines url components into a url passable into the request function.
+
+        Args:
+            secure (boolean): Whether or not to use HTTPS.
+            hostname (str): The host name for the url.
+            port (int): The port number, as an integer.
+            path (str): The hierarchical path.
+
+        Returns:
+            (str) A complete url made up of the arguments.
+    '''
     scheme = 'https' if secure else 'http'
     netloc = '{0}:{1}'.format(hostname, port)
 
