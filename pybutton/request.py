@@ -58,17 +58,6 @@ if sys.version_info[0] == 3:
         except ValueError:
             raise ButtonClientError('Invalid response: {0}'.format(response))
 
-    def request_url(secure, hostname, port, path):
-        ''' Combines url components into a url passable into the request
-        function. '''
-
-        scheme = 'https' if secure else 'http'
-        netloc = '{0}:{1}'.format(hostname, port)
-
-        return urlunsplit((scheme, netloc, path, '', ''))
-
-    __all__ = [Request, urlopen, HTTPError, request, request_url]
-
 else:
     from urllib2 import Request
     from urllib2 import urlopen
@@ -114,12 +103,13 @@ else:
         except ValueError:
             raise ButtonClientError('Invalid response: {0}'.format(response))
 
-    def request_url(secure, hostname, port, path):
-        ''' Combines url components into a url passable into the request
-        function. '''
-        scheme = 'https' if secure else 'http'
-        netloc = '{0}:{1}'.format(hostname, port)
 
-        return urlunsplit((scheme, netloc, path, '', ''))
+def request_url(secure, hostname, port, path):
+    ''' Combines url components into a url passable into the request
+    function. '''
+    scheme = 'https' if secure else 'http'
+    netloc = '{0}:{1}'.format(hostname, port)
 
-    __all__ = [Request, urlopen, HTTPError, request, request_url]
+    return urlunsplit((scheme, netloc, path, '', ''))
+
+__all__ = [Request, urlopen, HTTPError, request, request_url]
