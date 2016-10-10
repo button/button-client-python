@@ -19,14 +19,6 @@ config = {
 
 class AccountsTestCase(TestCase):
 
-        def test_path(self):
-            account = Accounts('sk-XXX', config)
-            self.assertEqual(account._path(), '/v1/affiliation/accounts')
-            self.assertEqual(
-                account._path('acc-123'),
-                '/v1/affiliation/accounts/acc-123/transactions'
-            )
-
         def test_all(self):
             account = Accounts('sk-XXX', config)
             account_response = [{'a': 1}, {'b': 2}]

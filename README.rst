@@ -206,7 +206,7 @@ Transactions
     )
 
     print(response)
-    # <class pybutton.Response [100 elements]>
+    # <class pybutton.Response [24 elements]>
 
 Contributing
 ------------

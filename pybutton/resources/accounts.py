@@ -26,25 +26,6 @@ class Accounts(Resource):
 
     '''
 
-    def _path(self, account_id=None):
-        '''Format a url path
-
-        Args:
-            account_id (str) optional: A Button account id ('acc-XXX')
-            query (dict) optional: A dictionary of key: value query parameters
-
-        Returns:
-            (str): The formatted path
-
-        '''
-
-        if account_id:
-            return '/v1/affiliation/accounts/{0}/transactions'.format(
-                account_id
-            )
-        else:
-            return '/v1/affiliation/accounts'
-
     def all(self):
         '''Get a list of available accounts
 
@@ -56,12 +37,13 @@ class Accounts(Resource):
 
         '''
 
-        return self.api_get(self._path())
+        return self.api_get('/v1/affiliation/accounts')
 
     def transactions(self, account_id, cursor=None, start=None, end=None):
         '''Get a list of transactions.
-        To paginate transactions, use the meta.next URL as your next request
-        URL until it is null.
+        To paginate transactions, pass the result of response.next() as the
+        cursor argument.
+
 
         Args:
             account_id (str) optional: A Button account id ('acc-XXX')
@@ -89,4 +71,8 @@ class Accounts(Resource):
         if end:
             query['end'] = end
 
-        return self.api_get(self._path(account_id), query=query)
+        path = '/v1/affiliation/accounts/{0}/transactions'.format(
+            account_id
+        )
+
+        return self.api_get(path, query=query)
