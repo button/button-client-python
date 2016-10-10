@@ -11,6 +11,13 @@ from pybutton.request import HTTPError
 from pybutton.resources.resource import Resource
 from pybutton.error import ButtonClientError
 
+config = {
+    'hostname': 'api.usebutton.com',
+    'secure': True,
+    'port': 443,
+    'timeout': None,
+}
+
 
 class ResourceTestCase(TestCase):
 
@@ -18,12 +25,12 @@ class ResourceTestCase(TestCase):
     def test_api_request(self, request):
         resource_response = {'a': 1}
         request.return_value = {'object': resource_response}
-        resource = Resource('sk-XXX')
+        resource = Resource('sk-XXX', config)
         response = resource._api_request('/v1/api', 'GET')
 
         args = request.call_args[0]
         self.assertEqual(response.to_dict(), resource_response)
-        self.assertEqual(args[0], 'https://api.usebutton.com/v1/api')
+        self.assertEqual(args[0], 'https://api.usebutton.com:443/v1/api')
         self.assertEqual(args[1], 'GET')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
         self.assertEqual(args[2]['Authorization'], 'Basic c2stWFhYOg==')
@@ -33,12 +40,12 @@ class ResourceTestCase(TestCase):
     def test_api_request_with_other_methods(self, request):
         resource_response = {'a': 1}
         request.return_value = {'object': resource_response}
-        resource = Resource('sk-XXX')
+        resource = Resource('sk-XXX', config)
         response = resource._api_request('/v1/api', 'POST')
 
         args = request.call_args[0]
         self.assertEqual(response.to_dict(), resource_response)
-        self.assertEqual(args[0], 'https://api.usebutton.com/v1/api')
+        self.assertEqual(args[0], 'https://api.usebutton.com:443/v1/api')
         self.assertEqual(args[1], 'POST')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
         self.assertEqual(args[2]['Authorization'], 'Basic c2stWFhYOg==')
@@ -48,12 +55,12 @@ class ResourceTestCase(TestCase):
     def test_api_request_with_other_paths(self, request):
         resource_response = {'a': 1}
         request.return_value = {'object': resource_response}
-        resource = Resource('sk-XXX')
+        resource = Resource('sk-XXX', config)
         response = resource._api_request('/v2/api', 'GET')
 
         args = request.call_args[0]
         self.assertEqual(response.to_dict(), resource_response)
-        self.assertEqual(args[0], 'https://api.usebutton.com/v2/api')
+        self.assertEqual(args[0], 'https://api.usebutton.com:443/v2/api')
         self.assertEqual(args[1], 'GET')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
         self.assertEqual(args[2]['Authorization'], 'Basic c2stWFhYOg==')
@@ -64,12 +71,12 @@ class ResourceTestCase(TestCase):
         data = {'c': 3}
         resource_response = {'a': 1}
         request.return_value = {'object': resource_response}
-        resource = Resource('sk-XXX')
+        resource = Resource('sk-XXX', config)
         response = resource._api_request('/v2/api', 'GET', data)
 
         args = request.call_args[0]
         self.assertEqual(response.to_dict(), resource_response)
-        self.assertEqual(args[0], 'https://api.usebutton.com/v2/api')
+        self.assertEqual(args[0], 'https://api.usebutton.com:443/v2/api')
         self.assertEqual(args[1], 'GET')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
         self.assertEqual(args[2]['Authorization'], 'Basic c2stWFhYOg==')
@@ -86,7 +93,7 @@ class ResourceTestCase(TestCase):
             raise HTTPError('url', 404, 'bloop', {}, fp)
 
         request.side_effect = side_effect
-        resource = Resource('sk-XXX')
+        resource = Resource('sk-XXX', config)
 
         try:
             resource._api_request('/v2/api', 'GET', data)
@@ -107,7 +114,7 @@ class ResourceTestCase(TestCase):
             raise HTTPError('url', 404, 'bloop', {}, fp)
 
         request.side_effect = side_effect
-        resource = Resource('sk-XXX')
+        resource = Resource('sk-XXX', config)
 
         try:
             resource._api_request('/v2/api', 'GET', data)
@@ -119,12 +126,12 @@ class ResourceTestCase(TestCase):
     def test_api_get(self, request):
         resource_response = {'a': 1}
         request.return_value = {'object': resource_response}
-        resource = Resource('sk-XXX')
+        resource = Resource('sk-XXX', config)
         response = resource.api_get('/v1/api')
 
         args = request.call_args[0]
         self.assertEqual(response.to_dict(), resource_response)
-        self.assertEqual(args[0], 'https://api.usebutton.com/v1/api')
+        self.assertEqual(args[0], 'https://api.usebutton.com:443/v1/api')
         self.assertEqual(args[1], 'GET')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
         self.assertEqual(args[2]['Authorization'], 'Basic c2stWFhYOg==')
@@ -135,12 +142,12 @@ class ResourceTestCase(TestCase):
         request_payload = {'c': 3}
         resource_response = {'a': 1}
         request.return_value = {'object': resource_response}
-        resource = Resource('sk-XXX')
+        resource = Resource('sk-XXX', config)
         response = resource.api_post('/v1/api', request_payload)
 
         args = request.call_args[0]
         self.assertEqual(response.to_dict(), resource_response)
-        self.assertEqual(args[0], 'https://api.usebutton.com/v1/api')
+        self.assertEqual(args[0], 'https://api.usebutton.com:443/v1/api')
         self.assertEqual(args[1], 'POST')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
         self.assertEqual(args[2]['Authorization'], 'Basic c2stWFhYOg==')
@@ -150,12 +157,12 @@ class ResourceTestCase(TestCase):
     def test_api_delete(self, request):
         resource_response = {'a': 1}
         request.return_value = {'object': resource_response}
-        resource = Resource('sk-XXX')
+        resource = Resource('sk-XXX', config)
         response = resource.api_delete('/v1/api')
 
         args = request.call_args[0]
         self.assertEqual(response.to_dict(), resource_response)
-        self.assertEqual(args[0], 'https://api.usebutton.com/v1/api')
+        self.assertEqual(args[0], 'https://api.usebutton.com:443/v1/api')
         self.assertEqual(args[1], 'DELETE')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
         self.assertEqual(args[2]['Authorization'], 'Basic c2stWFhYOg==')

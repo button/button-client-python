@@ -11,6 +11,7 @@ from ..response import Response
 from ..error import ButtonClientError
 from ..version import VERSION
 from ..request import request
+from ..request import request_url
 from ..request import HTTPError
 
 USER_AGENT = 'pybutton/{0} python/{1}'.format(VERSION, python_version())
@@ -26,15 +27,23 @@ class Resource(object):
         api_key (string): Your organization's API key.  Do find yours at
             https://app.usebutton.com/settings/organization.
 
+        config (dict): Configuration options for the client. Options include:
+            hostname: Defaults to api.usebutton.com.
+            port: Defaults to 443 if config.secure, else defaults to 80.
+            secure: Whether or not to use HTTPS. Defaults to True.
+            timeout: The time in seconds for network requests to abort.
+              Defaults to None.
+              (N.B: Button's API is only exposed through HTTPS. This option is
+              provided purely as a convenience for testing and development.)
+
     Raises:
         pybutton.ButtonClientError
 
     '''
 
-    API_BASE = 'https://api.usebutton.com'
-
-    def __init__(self, api_key):
+    def __init__(self, api_key, config):
         self.api_key = api_key
+        self.config = config
 
     def api_get(self, path):
         '''Make an HTTP GET request
@@ -91,7 +100,12 @@ class Resource(object):
 
         '''
 
-        url = '{0}{1}'.format(self.API_BASE, path)
+        url = request_url(
+            self.config['secure'],
+            self.config['hostname'],
+            self.config['port'],
+            path
+        )
         api_key_bytes = '{0}:'.format(self.api_key).encode()
         authorization = b64encode(api_key_bytes).decode()
 
@@ -101,7 +115,14 @@ class Resource(object):
         }
 
         try:
-            resp = request(url, method, headers, data).get('object', {})
+            resp = request(
+                url,
+                method,
+                headers,
+                data,
+                self.config['timeout']
+            ).get('object', {})
+
             return Response(resp)
         except HTTPError as e:
             response = e.read()
