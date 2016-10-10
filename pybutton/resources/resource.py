@@ -32,8 +32,10 @@ class Resource(object):
             hostname: Defaults to api.usebutton.com.
             port: Defaults to 443 if config.secure, else defaults to 80.
             secure: Whether or not to use HTTPS. Defaults to True.
-            timeout: The time in seconds for network requests to abort. Defaults to None.
-              (N.B: Button's API is only exposed through HTTPS. This option is provided purely as a convenience for testing and development.)
+            timeout: The time in seconds for network requests to abort.
+              Defaults to None.
+              (N.B: Button's API is only exposed through HTTPS. This option is
+              provided purely as a convenience for testing and development.)
 
     Raises:
         pybutton.ButtonClientError
@@ -99,10 +101,13 @@ class Resource(object):
 
         '''
 
-        url = request_url(self.config['secure'], self.config['hostname'], self.config['port'], path, query)
-
-        print(url)
-
+        url = request_url(
+            self.config['secure'],
+            self.config['hostname'],
+            self.config['port'],
+            path,
+            query
+        )
         api_key_bytes = '{0}:'.format(self.api_key).encode()
         authorization = b64encode(api_key_bytes).decode()
 
@@ -112,8 +117,20 @@ class Resource(object):
         }
 
         try:
-            resp = request(url, method, headers, data, self.config['timeout'])
-            return Response(resp.get('meta', {}), resp.get('object', resp.get('objects')))
+            resp = request(
+                url,
+                method,
+                headers,
+                data,
+                self.config['timeout']
+            ).get('object', {})
+
+            return Response(
+                resp.get('meta', {}),
+                # Response info may have 'object' or 'objects' key, depending
+                # on whether there are 1 or multiple results.
+                resp.get('object', resp.get('objects'))
+            )
         except HTTPError as e:
             response = e.read()
             fallback = '{0} {1}'.format(e.code, e.msg)

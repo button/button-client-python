@@ -22,8 +22,10 @@ class Client(object):
             hostname: Defaults to api.usebutton.com.
             port: Defaults to 443 if config.secure, else defaults to 80.
             secure: Whether or not to use HTTPS. Defaults to True.
-            timeout: The time in seconds for network requests to abort. Defaults to None.
-              (N.B: Button's API is only exposed through HTTPS. This option is provided purely as a convenience for testing and development.)
+            timeout: The time in seconds for network requests to abort.
+              Defaults to None.
+              (N.B: Button's API is only exposed through HTTPS. This option is
+              provided purely as a convenience for testing and development.)
 
     Attributes:
         orders (pybutton.Resource): Resource for managing Button Orders.
@@ -44,13 +46,13 @@ class Client(object):
         if config is None:
             config = {}
 
-        config = _config_with_defaults(config)
+        config = config_with_defaults(config)
 
         self.orders = Orders(api_key, config)
         self.accounts = Accounts(api_key, config)
 
 
-def _config_with_defaults(config):
+def config_with_defaults(config):
     secure = config.get('secure', True)
     defaultPort = 443 if secure else 80
 
@@ -58,5 +60,5 @@ def _config_with_defaults(config):
         'secure': secure,
         'timeout': config.get('timeout'),
         'hostname': config.get('hostname', 'api.usebutton.com'),
-        'port': config.get('port', defaultPort)
+        'port': config.get('port', defaultPort),
     }

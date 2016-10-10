@@ -15,8 +15,9 @@ config = {
     'hostname': 'api.usebutton.com',
     'secure': True,
     'port': 443,
-    'timeout': None
+    'timeout': None,
 }
+
 
 class ResourceTestCase(TestCase):
 

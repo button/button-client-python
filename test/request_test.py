@@ -200,8 +200,17 @@ class RequestTestCasePy3(TestCase):
                 pass
 
     def test_request_url(self):
-        path = request_url(True, 'api.usebutton.com', 443, '/v1/api/btnorder-XXX')
-        self.assertEqual(path, 'https://api.usebutton.com:443/v1/api/btnorder-XXX')
+        path = request_url(
+            True,
+            'api.usebutton.com',
+            443,
+            '/v1/api/btnorder-XXX'
+        )
+
+        self.assertEqual(
+            path,
+            'https://api.usebutton.com:443/v1/api/btnorder-XXX'
+        )
 
         path = request_url(False, 'localhost', 80, '/v1/api/btnorder-XXX')
         self.assertEqual(path, 'http://localhost:80/v1/api/btnorder-XXX')

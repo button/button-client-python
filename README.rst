@@ -78,7 +78,7 @@ You may optionally supply a config argument with your API key:
     'hostname': 'api.testsite.com',
     'port': 80,
     'secure': False,
-    'timeout': 5 # seconds
+    'timeout': 5, # seconds
   })
 
 The supported options are as follows:
