@@ -22,6 +22,8 @@ if sys.version_info[0] == 3:
     from urllib.error import HTTPError
     from urllib.parse import urlencode
     from urllib.parse import urlunsplit
+    from urllib.parse import urlparse
+    from urllib.parse import parse_qs
 
     def request(url, method, headers, data=None, timeout=None):
         ''' Make an HTTP request in Python 3.x
@@ -65,6 +67,8 @@ else:
     from urllib2 import HTTPError
     from urllib import urlencode
     from urlparse import urlunsplit
+    from urlparse import urlparse
+    from urlparse import parse_qs
 
     def request(url, method, headers, data=None, timeout=None):
         ''' Make an HTTP request in Python 2.x
@@ -125,4 +129,12 @@ def request_url(secure, hostname, port, path, query=None):
 
     return urlunsplit((scheme, netloc, path, query, ''))
 
-__all__ = [Request, urlopen, HTTPError, request, request_url]
+__all__ = [
+    Request,
+    urlopen,
+    HTTPError,
+    request,
+    request_url,
+    urlparse,
+    parse_qs
+]

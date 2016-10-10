@@ -6,7 +6,6 @@ from __future__ import unicode_literals
 from base64 import b64encode
 from platform import python_version
 import json
-import sys
 
 from ..response import Response
 from ..error import ButtonClientError
@@ -123,7 +122,7 @@ class Resource(object):
                 headers,
                 data,
                 self.config['timeout']
-            ).get('object', {})
+            )
 
             return Response(
                 resp.get('meta', {}),

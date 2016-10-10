@@ -16,12 +16,16 @@ config = {
     'timeout': None
 }
 
+
 class AccountsTestCase(TestCase):
 
         def test_path(self):
             account = Accounts('sk-XXX', config)
             self.assertEqual(account._path(), '/v1/affiliation/accounts')
-            self.assertEqual(account._path('acc-123'), '/v1/affiliation/accounts/acc-123/transactions')
+            self.assertEqual(
+                account._path('acc-123'),
+                '/v1/affiliation/accounts/acc-123/transactions'
+            )
 
         def test_all(self):
             account = Accounts('sk-XXX', config)
@@ -46,9 +50,17 @@ class AccountsTestCase(TestCase):
             with patch.object(account, 'api_get', api_get):
                 response = account.transactions('acc-123')
                 self.assertEqual(response, account_response)
-                self.assertEqual(api_get.call_args[0][0], '/v1/affiliation/accounts/acc-123/transactions')
+                self.assertEqual(
+                    api_get.call_args[0][0],
+                    '/v1/affiliation/accounts/acc-123/transactions'
+                )
 
-                response = account.transactions('acc-123', cursor='abc', start='2016-09-15T00:00:00.000Z', end='2016-09-30T00:00:00.000Z')
+                response = account.transactions(
+                    'acc-123',
+                    cursor='abc',
+                    start='2016-09-15T00:00:00.000Z',
+                    end='2016-09-30T00:00:00.000Z'
+                )
                 self.assertEqual(response, account_response)
                 query = api_get.call_args[1]['query']
                 self.assertEqual(query['cursor'], 'abc')

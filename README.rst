@@ -91,7 +91,7 @@ The supported options are as follows:
 Resources
 ---------
 
-We currently expose only one resource to manage, ``Orders``.
+We currently expose two resources to manage, ``Orders`` and ``Accounts``.
 
 Orders
 ~~~~~~
@@ -162,6 +162,51 @@ Delete
 
     print(response)
     # <class pybutton.Response >
+
+Accounts
+~~~~~~~~
+
+All
+'''
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.accounts.all()
+
+    print(response)
+    # <class pybutton.Response [2 elements]>
+
+Transactions
+''''''''''''
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.accounts.transactions('acc-123',
+        start='2016-07-15T00:00:00.000Z',
+        end='2016-09-30T00:00:00.000Z'
+    )
+
+    print(response)
+    # <class pybutton.Response [100 elements]>
+
+    cursor = response.next()
+
+    response = client.accounts.transactions('acc-123',
+        cursor=cursor,
+        start='2016-07-15T00:00:00.000Z',
+        end='2016-09-30T00:00:00.000Z'
+    )
+
+    print(response)
+    # <class pybutton.Response [100 elements]>
 
 Contributing
 ------------

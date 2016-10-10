@@ -6,10 +6,12 @@ from __future__ import unicode_literals
 from .request import urlparse
 from .request import parse_qs
 
+
 class Response(object):
     '''The Response class wraps the returned values from an API call.
 
-    It exposes the response data via the `data` method and cursors for pagination via the `next`/`prev` methods.
+    It exposes the response data via the `data` method and cursors for
+    pagination via the `next`/`prev` methods.
 
     Args:
         meta (dict): The metadata from an API call
@@ -25,15 +27,21 @@ class Response(object):
         self.response_data = response_data
 
     def data(self):
-        '''Return the raw response element(s) received from the server. May be a single dict or an array of dicts.'''
+        '''Return the raw response element(s) received from the server.
+           May be a single dict or an array of dicts.
+        '''
         return self.response_data
 
     def next(self):
-        '''For paginated responses, return the url used to fetch the next elements'''
+        '''For paginated responses, returns the url used to fetch
+            the next elements.
+        '''
         return self._format_cursor(self.meta.get('next'))
 
     def prev(self):
-        '''For paginated responses, return the url used to fetch the previous elements'''
+        '''For paginated responses, returns the url used to fetch
+            the previous elements.
+        '''
         return self._format_cursor(self.meta.get('prev'))
 
     def __repr__(self):
@@ -44,7 +52,9 @@ class Response(object):
                 values = values + ['{0}: {1}'.format(k, v)]
             return '<class pybutton.Response {0}>'.format(', '.join(values))
         elif isinstance(self.response_data, list):
-            return '<class pybutton.Response [{0} elements]>'.format(len(self.response_data))
+            return '<class pybutton.Response [{0} elements]>'.format(
+                len(self.response_data)
+            )
         else:
             return '<class pybutton.Response>'
 
