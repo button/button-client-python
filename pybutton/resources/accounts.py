@@ -7,7 +7,7 @@ from .resource import Resource
 
 
 class Accounts(Resource):
-    '''Manages interacting with Button Orders with the Button API
+    '''Manages interacting with Button Accounts with the Button API
 
     Args:
         api_key (string): Your organization's API key.  Do find yours at
@@ -41,8 +41,8 @@ class Accounts(Resource):
 
     def transactions(self, account_id, cursor=None, start=None, end=None):
         '''Get a list of transactions.
-        To paginate transactions, pass the result of response.next() as the
-        cursor argument.
+        To paginate transactions, pass the result of response.nextCursor() as
+        the cursor argument.
 
 
         Args:

@@ -129,12 +129,18 @@ def request_url(secure, hostname, port, path, query=None):
 
     return urlunsplit((scheme, netloc, path, query, ''))
 
+def query_dict(url):
+    url_components = urlparse(url)
+
+    if (url_components):
+        query_string = url_components.query
+        return parse_qs(query_string)
+
 __all__ = [
     Request,
     urlopen,
     HTTPError,
     request,
     request_url,
-    urlparse,
-    parse_qs
+    query_dict,
 ]

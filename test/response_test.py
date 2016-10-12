@@ -19,31 +19,42 @@ class ResponseTestCase(TestCase):
         response = Response({}, response_data)
         self.assertEqual(response.data(), response_data)
 
-    def test_next(self):
+    def test_cursors(self):
+        response_data = {'a': 1, 'b': 2}
+
         meta = {
             'status': 'ok',
             'next': """https://api.usebutton.com:443/v1/affiliation/accounts/
                 acc-123/transactions?cursor=abc""",
-            'prev': None
+            'prev': """https://api.usebutton.com:443/v1/affiliation/accounts/
+                acc-123/transactions?cursor=def""",
         }
-        response_data = {'a': 1, 'b': 2}
         response = Response(meta, response_data)
 
-        self.assertEqual(response.next(), 'abc')
-        self.assertEqual(response.prev(), None)
+        self.assertEqual(response.nextCursor(), 'abc')
+        self.assertEqual(response.prevCursor(), 'def')
 
-    def test_prev(self):
         meta = {
             'status': 'ok',
             'next': None,
-            'prev': """https://api.usebutton.com:443/v1/affiliation/accounts/
-                acc-123/transactions?cursor=def"""
+            'prev': 'https://',
         }
-        response_data = {'a': 1, 'b': 2}
         response = Response(meta, response_data)
 
-        self.assertEqual(response.next(), None)
-        self.assertEqual(response.prev(), 'def')
+        self.assertEqual(response.nextCursor(), None)
+        self.assertEqual(response.prevCursor(), None)
+
+        meta = {
+            'status': 'ok',
+            'next': '12345',
+            'prev': """https://api.usebutton.com:443/v1/affiliation/accounts/
+                acc-123/transactions?c=abc"""
+        }
+        response = Response(meta, response_data)
+
+        self.assertEqual(response.nextCursor(), None)
+        self.assertEqual(response.prevCursor(), None)
+
 
     def test_repr(self):
         response_data = {'a': 1}

@@ -3,9 +3,7 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from .request import urlparse
-from .request import parse_qs
-
+from .request import query_dict
 
 class Response(object):
     '''The Response class wraps the returned values from an API call.
@@ -32,13 +30,13 @@ class Response(object):
         '''
         return self.response_data
 
-    def next(self):
+    def nextCursor(self):
         '''For paginated responses, returns the url used to fetch
             the next elements.
         '''
         return self._format_cursor(self.meta.get('next'))
 
-    def prev(self):
+    def prevCursor(self):
         '''For paginated responses, returns the url used to fetch
             the previous elements.
         '''
@@ -47,12 +45,18 @@ class Response(object):
     def __repr__(self):
         values = []
 
+        classPrefix = 'class pybutton.Response'
+
         if isinstance(self.response_data, dict):
             for k, v in self.response_data.items():
                 values = values + ['{0}: {1}'.format(k, v)]
-            return '<class pybutton.Response {0}>'.format(', '.join(values))
+            return '<{0} {1}>'.format(
+                classPrefix,
+                ', '.join(values)
+            )
         elif isinstance(self.response_data, list):
-            return '<class pybutton.Response [{0} elements]>'.format(
+            return '<{0} [{1} elements]>'.format(
+                classPrefix,
                 len(self.response_data)
             )
         else:
@@ -60,7 +64,8 @@ class Response(object):
 
     def _format_cursor(self, cursor_url):
         if cursor_url:
-            query_string = urlparse(cursor_url)[4]
-            query = parse_qs(query_string)
+            query = query_dict(cursor_url)
+            cursor_values = query.get('cursor')
 
-            return query['cursor'][0]
+            if cursor_values:
+                return cursor_values[0]

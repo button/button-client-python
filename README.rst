@@ -183,13 +183,21 @@ All
 Transactions
 ''''''''''''
 
+Along with the required account ID, you may also
+pass the following optional arguments:
+
+* ``cursor`` (string): An API cursor to fetch a specific set of results.
+* ``start`` (ISO-8601 datetime string): Fetch transactions after this time.
+* ``end`` (ISO-8601 datetime string): Fetch transactions before this time.
+
 .. code:: python
 
     from pybutton import Client
 
     client = Client('sk-XXX')
 
-    response = client.accounts.transactions('acc-123',
+    response = client.accounts.transactions(
+        'acc-123',
         start='2016-07-15T00:00:00.000Z',
         end='2016-09-30T00:00:00.000Z'
     )
@@ -197,16 +205,79 @@ Transactions
     print(response)
     # <class pybutton.Response [100 elements]>
 
-    cursor = response.next()
+Response
+--------
 
-    response = client.accounts.transactions('acc-123',
-        cursor=cursor,
-        start='2016-07-15T00:00:00.000Z',
-        end='2016-09-30T00:00:00.000Z'
-    )
+The format of the ``pybutton.Response`` class varies depending on whether it contains
+one or multiple elements.
+
+Methods
+~~~~~~~
+
+Data
+''''
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.orders.get('btnorder-XXX')
+
+    print(response.data())
+    # {'total': 50, 'currency': 'USD', 'status': 'open' ... }
+
+    response = client.accounts.all()
+
+    print(response.data())
+    # [{'id': 'acc-123', ... }, {'id': 'acc-234', ... }]
+
+NextCursor
+''''''''''
+
+For any paged resource, ``nextCursor()`` will return a cursor to
+supply for the next page of results.
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.accounts.transactions('acc-123')
+    cursor = response.nextCursor()
+
+    # loop through and print all transactions
+    while cursor:
+        response = client.accounts.transactions('acc-123', cursor=cursor)
+        print(response.data())
+        cursor = response.nextCursor()
+
+PrevCursor
+''''''''''
+
+For any paged resource, ``prevCursor()`` will return a cursor to
+supply for the next page of results.
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.accounts.transactions('acc-123', cursor='xyz')
 
     print(response)
-    # <class pybutton.Response [24 elements]>
+    # <class pybutton.Response [25 elements]>
+
+    cursor = response.prevCursor()
+
+    response = client.accounts.transactions('acc-123', cursor=cursor)
+
+    print(response)
+    # <class pybutton.Response [100 elements]>
+
 
 Contributing
 ------------
