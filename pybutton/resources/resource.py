@@ -45,7 +45,7 @@ class Resource(object):
         self.api_key = api_key
         self.config = config
 
-    def api_get(self, path):
+    def api_get(self, path, query=None):
         '''Make an HTTP GET request
 
         Args:
@@ -55,7 +55,7 @@ class Resource(object):
             (pybutton.Response): The API response
 
         '''
-        return self._api_request(path, 'GET')
+        return self._api_request(path, 'GET', query=query)
 
     def api_post(self, path, data):
         '''Make an HTTP POST request
@@ -82,7 +82,7 @@ class Resource(object):
         '''
         return self._api_request(path, 'DELETE')
 
-    def _api_request(self, path, method, data=None):
+    def _api_request(self, path, method, data=None, query=None):
         '''Make an HTTP request
 
         Any data provided will be JSON encoded an included as part of the
@@ -104,14 +104,15 @@ class Resource(object):
             self.config['secure'],
             self.config['hostname'],
             self.config['port'],
-            path
+            path,
+            query,
         )
         api_key_bytes = '{0}:'.format(self.api_key).encode()
         authorization = b64encode(api_key_bytes).decode()
 
         headers = {
             'Authorization': 'Basic {0}'.format(authorization),
-            'User-Agent': USER_AGENT
+            'User-Agent': USER_AGENT,
         }
 
         try:
@@ -120,10 +121,15 @@ class Resource(object):
                 method,
                 headers,
                 data,
-                self.config['timeout']
-            ).get('object', {})
+                self.config['timeout'],
+            )
 
-            return Response(resp)
+            return Response(
+                resp.get('meta', {}),
+                # Response info may have 'object' or 'objects' key, depending
+                # on whether there are 1 or multiple results.
+                resp.get('object', resp.get('objects'))
+            )
         except HTTPError as e:
             response = e.read()
             fallback = '{0} {1}'.format(e.code, e.msg)

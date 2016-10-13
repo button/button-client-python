@@ -1,3 +1,6 @@
+2.0.0 October 13, 2016
+  - Added accounts resource
+  - Breaking changes to pybutton.Response class
 1.1.0 October 4, 2016
   - Added config options: hostname, port, secure, timeout
 1.0.2 August 11, 2016

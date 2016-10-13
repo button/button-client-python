@@ -11,6 +11,7 @@ from mock import patch
 
 from pybutton.request import request
 from pybutton.request import request_url
+from pybutton.request import query_dict
 from pybutton import ButtonClientError
 
 
@@ -214,3 +215,13 @@ class RequestTestCasePy3(TestCase):
 
         path = request_url(False, 'localhost', 80, '/v1/api/btnorder-XXX')
         self.assertEqual(path, 'http://localhost:80/v1/api/btnorder-XXX')
+
+    def test_query_dict(self):
+        url = 'https://api.usebutton.com:/test/url?cursor=test_cursor'
+        result = query_dict(url)
+        self.assertEqual(result.get('cursor'), ['test_cursor'])
+        self.assertEqual(result.get('random_key'), None)
+
+        no_query_url = 'https://api.usebutton.com:/test/url'
+        result = query_dict(no_query_url)
+        self.assertEqual(result.get('cursor'), None)

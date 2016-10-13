@@ -10,15 +10,62 @@ from pybutton.response import Response
 
 class ResponseTestCase(TestCase):
 
-    def test_to_dict(self):
-        attrs = {'a': 1, 'b': 2}
-        response = Response(attrs)
+    def test_data(self):
+        response_data = {'a': 1, 'b': 2}
+        response = Response({}, response_data)
+        self.assertEqual(response.data(), response_data)
 
-        self.assertEqual(response.to_dict(), attrs)
+        response_data = [{'a': 1, 'b': 2}, {'c': 3}, {'d': 4}]
+        response = Response({}, response_data)
+        self.assertEqual(response.data(), response_data)
 
-    def test_access_attribute(self):
-        attrs = {'a': 1, 'b': 2}
-        response = Response(attrs)
+    def test_cursors(self):
+        response_data = {'a': 1, 'b': 2}
 
-        self.assertEqual(response.a, attrs['a'])
-        self.assertEqual(response.b, attrs['b'])
+        meta = {
+            'status': 'ok',
+            'next': """https://api.usebutton.com:443/v1/affiliation/accounts/
+                acc-123/transactions?cursor=abc""",
+            'prev': """https://api.usebutton.com:443/v1/affiliation/accounts/
+                acc-123/transactions?cursor=def""",
+        }
+        response = Response(meta, response_data)
+
+        self.assertEqual(response.next_cursor(), 'abc')
+        self.assertEqual(response.prev_cursor(), 'def')
+
+        meta = {
+            'status': 'ok',
+            'next': None,
+            'prev': 'https://',
+        }
+        response = Response(meta, response_data)
+
+        self.assertEqual(response.next_cursor(), None)
+        self.assertEqual(response.prev_cursor(), None)
+
+        meta = {
+            'status': 'ok',
+            'next': '12345',
+            'prev': """https://api.usebutton.com:443/v1/affiliation/accounts/
+                acc-123/transactions?c=abc""",
+        }
+        response = Response(meta, response_data)
+
+        self.assertEqual(response.next_cursor(), None)
+        self.assertEqual(response.prev_cursor(), None)
+
+    def test_repr(self):
+        response_data = {'a': 1}
+        response = Response({}, response_data)
+        self.assertEqual(response.__repr__(), '<class pybutton.Response a: 1>')
+
+        response_data = [{'a': 1, 'b': 2}, {'c': 3}, {'d': 4}]
+        response = Response({}, response_data)
+        self.assertEqual(
+            response.__repr__(),
+            '<class pybutton.Response [3 elements]>',
+        )
+
+        response = Response({}, None)
+        self.assertEqual(response.__repr__(), '<class pybutton.Response>')

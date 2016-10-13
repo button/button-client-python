@@ -29,7 +29,7 @@ class ResourceTestCase(TestCase):
         response = resource._api_request('/v1/api', 'GET')
 
         args = request.call_args[0]
-        self.assertEqual(response.to_dict(), resource_response)
+        self.assertEqual(response.data(), resource_response)
         self.assertEqual(args[0], 'https://api.usebutton.com:443/v1/api')
         self.assertEqual(args[1], 'GET')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
@@ -44,7 +44,7 @@ class ResourceTestCase(TestCase):
         response = resource._api_request('/v1/api', 'POST')
 
         args = request.call_args[0]
-        self.assertEqual(response.to_dict(), resource_response)
+        self.assertEqual(response.data(), resource_response)
         self.assertEqual(args[0], 'https://api.usebutton.com:443/v1/api')
         self.assertEqual(args[1], 'POST')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
@@ -59,7 +59,7 @@ class ResourceTestCase(TestCase):
         response = resource._api_request('/v2/api', 'GET')
 
         args = request.call_args[0]
-        self.assertEqual(response.to_dict(), resource_response)
+        self.assertEqual(response.data(), resource_response)
         self.assertEqual(args[0], 'https://api.usebutton.com:443/v2/api')
         self.assertEqual(args[1], 'GET')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
@@ -75,7 +75,7 @@ class ResourceTestCase(TestCase):
         response = resource._api_request('/v2/api', 'GET', data)
 
         args = request.call_args[0]
-        self.assertEqual(response.to_dict(), resource_response)
+        self.assertEqual(response.data(), resource_response)
         self.assertEqual(args[0], 'https://api.usebutton.com:443/v2/api')
         self.assertEqual(args[1], 'GET')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
@@ -130,7 +130,7 @@ class ResourceTestCase(TestCase):
         response = resource.api_get('/v1/api')
 
         args = request.call_args[0]
-        self.assertEqual(response.to_dict(), resource_response)
+        self.assertEqual(response.data(), resource_response)
         self.assertEqual(args[0], 'https://api.usebutton.com:443/v1/api')
         self.assertEqual(args[1], 'GET')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
@@ -146,7 +146,7 @@ class ResourceTestCase(TestCase):
         response = resource.api_post('/v1/api', request_payload)
 
         args = request.call_args[0]
-        self.assertEqual(response.to_dict(), resource_response)
+        self.assertEqual(response.data(), resource_response)
         self.assertEqual(args[0], 'https://api.usebutton.com:443/v1/api')
         self.assertEqual(args[1], 'POST')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
@@ -161,7 +161,7 @@ class ResourceTestCase(TestCase):
         response = resource.api_delete('/v1/api')
 
         args = request.call_args[0]
-        self.assertEqual(response.to_dict(), resource_response)
+        self.assertEqual(response.data(), resource_response)
         self.assertEqual(args[0], 'https://api.usebutton.com:443/v1/api')
         self.assertEqual(args[1], 'DELETE')
         self.assertTrue(len(args[2]['User-Agent']) != 0)

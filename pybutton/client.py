@@ -3,6 +3,7 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+from .resources import Accounts
 from .resources import Orders
 from .error import ButtonClientError
 
@@ -48,6 +49,7 @@ class Client(object):
         config = config_with_defaults(config)
 
         self.orders = Orders(api_key, config)
+        self.accounts = Accounts(api_key, config)
 
 
 def config_with_defaults(config):

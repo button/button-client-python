@@ -91,7 +91,7 @@ The supported options are as follows:
 Resources
 ---------
 
-We currently expose only one resource to manage, ``Orders``.
+We currently expose two resources to manage, ``Orders`` and ``Accounts``.
 
 Orders
 ~~~~~~
@@ -162,6 +162,121 @@ Delete
 
     print(response)
     # <class pybutton.Response >
+
+Accounts
+~~~~~~~~
+
+All
+'''
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.accounts.all()
+
+    print(response)
+    # <class pybutton.Response [2 elements]>
+
+Transactions
+''''''''''''
+
+Along with the required account ID, you may also
+pass the following optional arguments:
+
+* ``cursor`` (string): An API cursor to fetch a specific set of results.
+* ``start`` (ISO-8601 datetime string): Fetch transactions after this time.
+* ``end`` (ISO-8601 datetime string): Fetch transactions before this time.
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.accounts.transactions(
+        'acc-123',
+        start='2016-07-15T00:00:00.000Z',
+        end='2016-09-30T00:00:00.000Z'
+    )
+
+    print(response)
+    # <class pybutton.Response [100 elements]>
+
+Response
+--------
+
+Methods
+~~~~~~~
+
+data
+''''
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.orders.get('btnorder-XXX')
+
+    print(response.data())
+    # {'total': 50, 'currency': 'USD', 'status': 'open' ... }
+
+    response = client.accounts.all()
+
+    print(response.data())
+    # [{'id': 'acc-123', ... }, {'id': 'acc-234', ... }]
+
+next_cursor
+''''''''''
+
+For any paged resource, ``next_cursor()`` will return a cursor to
+supply for the next page of results. If ``next_cursor()`` returns ``None``,
+there are no more results.
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.accounts.transactions('acc-123')
+    cursor = response.next_cursor()
+
+    # loop through and print all transactions
+    while cursor:
+        response = client.accounts.transactions('acc-123', cursor=cursor)
+        print(response.data())
+        cursor = response.next_cursor()
+
+prev_cursor
+''''''''''
+
+For any paged resource, ``prev_cursor()`` will return a cursor to
+supply for the next page of results. If ``prev_cursor()`` returns
+``None``, there are no more previous results.
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.accounts.transactions('acc-123', cursor='xyz')
+
+    print(response)
+    # <class pybutton.Response [25 elements]>
+
+    cursor = response.prev_cursor()
+
+    response = client.accounts.transactions('acc-123', cursor=cursor)
+
+    print(response)
+    # <class pybutton.Response [100 elements]>
+
 
 Contributing
 ------------
