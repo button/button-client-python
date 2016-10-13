@@ -231,7 +231,7 @@ data
     # [{'id': 'acc-123', ... }, {'id': 'acc-234', ... }]
 
 next_cursor
-''''''''''
+'''''''''''
 
 For any paged resource, ``next_cursor()`` will return a cursor to
 supply for the next page of results. If ``next_cursor()`` returns ``None``,
@@ -253,7 +253,7 @@ there are no more results.
         cursor = response.next_cursor()
 
 prev_cursor
-''''''''''
+'''''''''''
 
 For any paged resource, ``prev_cursor()`` will return a cursor to
 supply for the next page of results. If ``prev_cursor()`` returns
