@@ -133,13 +133,18 @@ def request_url(secure, hostname, port, path, query=None):
 
 def query_dict(url):
     '''
-        Given a url, extracts the query parameters into a dictionary of the
-        following form:
+        Given a url, returns a dictionary of its query parameters.
 
-        {
-            'query_parameter': [ list of values ],
-            ...
-        }
+        Args:
+            url (string): The url to extract query parameters from.
+
+        Returns:
+            (dict) A dictionary of query parameters, formatted as follows:
+            {
+              query_name: [ list of values ],
+              ...
+            }
+
     '''
     url_components = urlparse(url)
 
