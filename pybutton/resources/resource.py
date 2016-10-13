@@ -105,14 +105,14 @@ class Resource(object):
             self.config['hostname'],
             self.config['port'],
             path,
-            query
+            query,
         )
         api_key_bytes = '{0}:'.format(self.api_key).encode()
         authorization = b64encode(api_key_bytes).decode()
 
         headers = {
             'Authorization': 'Basic {0}'.format(authorization),
-            'User-Agent': USER_AGENT
+            'User-Agent': USER_AGENT,
         }
 
         try:
@@ -121,7 +121,7 @@ class Resource(object):
                 method,
                 headers,
                 data,
-                self.config['timeout']
+                self.config['timeout'],
             )
 
             return Response(

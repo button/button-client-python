@@ -31,8 +31,8 @@ class ResponseTestCase(TestCase):
         }
         response = Response(meta, response_data)
 
-        self.assertEqual(response.nextCursor(), 'abc')
-        self.assertEqual(response.prevCursor(), 'def')
+        self.assertEqual(response.next_cursor(), 'abc')
+        self.assertEqual(response.prev_cursor(), 'def')
 
         meta = {
             'status': 'ok',
@@ -41,20 +41,19 @@ class ResponseTestCase(TestCase):
         }
         response = Response(meta, response_data)
 
-        self.assertEqual(response.nextCursor(), None)
-        self.assertEqual(response.prevCursor(), None)
+        self.assertEqual(response.next_cursor(), None)
+        self.assertEqual(response.prev_cursor(), None)
 
         meta = {
             'status': 'ok',
             'next': '12345',
             'prev': """https://api.usebutton.com:443/v1/affiliation/accounts/
-                acc-123/transactions?c=abc"""
+                acc-123/transactions?c=abc""",
         }
         response = Response(meta, response_data)
 
-        self.assertEqual(response.nextCursor(), None)
-        self.assertEqual(response.prevCursor(), None)
-
+        self.assertEqual(response.next_cursor(), None)
+        self.assertEqual(response.prev_cursor(), None)
 
     def test_repr(self):
         response_data = {'a': 1}
@@ -65,7 +64,7 @@ class ResponseTestCase(TestCase):
         response = Response({}, response_data)
         self.assertEqual(
             response.__repr__(),
-            '<class pybutton.Response [3 elements]>'
+            '<class pybutton.Response [3 elements]>',
         )
 
         response = Response({}, None)

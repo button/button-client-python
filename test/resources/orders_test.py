@@ -13,7 +13,7 @@ config = {
     'hostname': 'api.usebutton.com',
     'secure': True,
     'port': 443,
-    'timeout': None
+    'timeout': None,
 }
 
 
@@ -65,7 +65,7 @@ class OrdersTestCase(TestCase):
             self.assertEqual(response, order_response)
             api_post.assert_called_with(
                 '/v1/order/btnorder-XXX',
-                order_payload
+                order_payload,
             )
 
         def test_delete(self):

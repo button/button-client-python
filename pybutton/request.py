@@ -119,17 +119,28 @@ def request_url(secure, hostname, port, path, query=None):
             hostname (str): The host name for the url.
             port (int): The port number, as an integer.
             path (str): The hierarchical path.
+            query (dict): A dict of query parameters.
 
         Returns:
             (str) A complete url made up of the arguments.
     '''
-    query = urlencode(query) if query else ''
+    encoded_query = urlencode(query) if query else ''
     scheme = 'https' if secure else 'http'
     netloc = '{0}:{1}'.format(hostname, port)
 
-    return urlunsplit((scheme, netloc, path, query, ''))
+    return urlunsplit((scheme, netloc, path, encoded_query, ''))
+
 
 def query_dict(url):
+    '''
+        Given a url, extracts the query parameters into a dictionary of the
+        following form:
+
+        {
+            'query_parameter': [ list of values ],
+            ...
+        }
+    '''
     url_components = urlparse(url)
 
     if (url_components):

@@ -41,7 +41,7 @@ class Accounts(Resource):
 
     def transactions(self, account_id, cursor=None, start=None, end=None):
         '''Get a list of transactions.
-        To paginate transactions, pass the result of response.nextCursor() as
+        To paginate transactions, pass the result of response.next_cursor() as
         the cursor argument.
 
 

@@ -208,13 +208,10 @@ pass the following optional arguments:
 Response
 --------
 
-The format of the ``pybutton.Response`` class varies depending on whether it contains
-one or multiple elements.
-
 Methods
 ~~~~~~~
 
-Data
+data
 ''''
 
 .. code:: python
@@ -233,11 +230,12 @@ Data
     print(response.data())
     # [{'id': 'acc-123', ... }, {'id': 'acc-234', ... }]
 
-NextCursor
+next_cursor
 ''''''''''
 
-For any paged resource, ``nextCursor()`` will return a cursor to
-supply for the next page of results.
+For any paged resource, ``next_cursor()`` will return a cursor to
+supply for the next page of results. If ``next_cursor()`` returns ``None``,
+there are no more results.
 
 .. code:: python
 
@@ -246,19 +244,20 @@ supply for the next page of results.
     client = Client('sk-XXX')
 
     response = client.accounts.transactions('acc-123')
-    cursor = response.nextCursor()
+    cursor = response.next_cursor()
 
     # loop through and print all transactions
     while cursor:
         response = client.accounts.transactions('acc-123', cursor=cursor)
         print(response.data())
-        cursor = response.nextCursor()
+        cursor = response.next_cursor()
 
-PrevCursor
+prev_cursor
 ''''''''''
 
-For any paged resource, ``prevCursor()`` will return a cursor to
-supply for the next page of results.
+For any paged resource, ``prev_cursor()`` will return a cursor to
+supply for the next page of results. If ``prev_cursor()`` returns
+``None``, there are no more previous results.
 
 .. code:: python
 
@@ -271,7 +270,7 @@ supply for the next page of results.
     print(response)
     # <class pybutton.Response [25 elements]>
 
-    cursor = response.prevCursor()
+    cursor = response.prev_cursor()
 
     response = client.accounts.transactions('acc-123', cursor=cursor)
 
