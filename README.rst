@@ -114,6 +114,7 @@ Create
         'currency': 'USD',
         'order_id': '2007',
         'finalization_date': '2017-08-02T19:26:08Z',
+        'btn_ref': 'srctok-XXX',
     })
 
     print(response)
