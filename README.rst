@@ -40,9 +40,7 @@ The client will always attempt to raise a ``pybutton.ButtonClientError``
 in an error condition.
 
 All API requests will return a ``pybutton.response.Response`` instance,
-which supports accessing data properties from the API response as
-attributes. To access the raw response dict, use ``#to_dict``. For
-instance:
+which supports accessing data via the `#data` method.  For instance:
 
 .. code:: python
 
@@ -59,11 +57,9 @@ instance:
     print(response)
     # <class pybutton.Response status: open, btn_ref: None, line_items: [], ...>
 
-    print(response.status)
-    # 'open'
-
-    print(response.to_dict())
+    print(response.data())
     # {'status': open, 'btn_ref': None, 'line_items': [], ...}
+
 
 Configuration
 -------------
