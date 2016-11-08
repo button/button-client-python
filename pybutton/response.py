@@ -16,10 +16,6 @@ class Response(object):
         meta (dict): The metadata from an API call
         response_data (dict or array<dict>): The response elements from an
             API call
-
-    Attributes:
-        * (*): All keys in `attrs` will be exposed as attributes of an instance
-
     '''
 
     classPrefix = 'class pybutton.Response'
@@ -29,21 +25,27 @@ class Response(object):
         self.response_data = response_data
 
     def data(self):
-        '''Return the raw response element(s) received from the server.
-           May be a single dict or an array of dicts.
         '''
+        Return the raw response element(s) received from the server.
+        May be a single dict or an array of dicts.
+        '''
+
         return self.response_data
 
     def next_cursor(self):
-        '''For paginated responses, returns the url used to fetch
-            the next elements.
         '''
+        For paginated responses, returns the url used to fetch
+        the next elements.
+        '''
+
         return self._format_cursor(self.meta.get('next'))
 
     def prev_cursor(self):
-        '''For paginated responses, returns the url used to fetch
-            the previous elements.
         '''
+        For paginated responses, returns the url used to fetch
+        the previous elements.
+        '''
+
         return self._format_cursor(self.meta.get('prev'))
 
     def __repr__(self):
@@ -60,8 +62,8 @@ class Response(object):
                 Response.classPrefix,
                 len(self.response_data)
             )
-        else:
-            return '<class pybutton.Response>'
+
+        return '<class pybutton.Response>'
 
     def _format_cursor(self, cursor_url):
         if cursor_url:
