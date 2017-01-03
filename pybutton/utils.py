@@ -14,13 +14,13 @@ def is_webhook_authentic(webhook_secret, request_body, sent_signature):
     body matches the sent signature and False otherwise.
 
     Args:
-        webhook_secret (string): Your webhooks's secret key.  Find yours at
+        webhook_secret (basestring): Your webhooks's secret key.  Find yours at
             https://app.usebutton.com/webhooks.
 
-        request_body (string): UTF8 encoded byte-string of the request body
+        request_body (basestring): UTF8 encoded byte-string of the request body
 
-        sent_signature (string): "X-Button-Siganture" HTTP Header sent with the
-            request.
+        sent_signature (basestring): "X-Button-Siganture" HTTP Header sent with
+            the request.
 
     Returns:
         (bool) Whether or not the request is authentic
@@ -35,24 +35,33 @@ def is_webhook_authentic(webhook_secret, request_body, sent_signature):
     if hasattr(hmac, 'compare_digest'):
         return hmac.compare_digest(
             computed_signature,
-            sent_signature
+            as_bytes(sent_signature, True)
         )
 
     return computed_signature == sent_signature
 
-def as_bytes(v):
+
+def as_bytes(v, only_py_2=False):
     '''Converts v to a UTF-8 byte string if unicode, else returns identity.
 
     Args:
-        v (str|unicode) the string to convert
+        v (str|unicode): the string to convert
+
+        only_py_2 (bool): If true, only converts to bytes if running in a
+            python 2 interpretter
 
     Returns:
         (byte string): A byte string copy, UTF-8 enccoded
     '''
 
+    python_version = sys.version_info[0]
+
+    if only_py_2 and python_version != 2:
+        return v
+
     should_encode = (
-        sys.version_info[0] == 2 and isinstance(v, unicode)
-        or sys.version_info[0] == 3 and isinstance(v, str)
+        python_version == 2 and isinstance(v, unicode)
+        or python_version == 3 and isinstance(v, str)
     )
 
     if should_encode:
