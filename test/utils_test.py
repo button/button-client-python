@@ -12,22 +12,22 @@ class UtilsTestCase(TestCase):
 
     def test_is_webhook_authentic(self):
         signature = (
-            u'79a3a5291c94340ff0058a631906375'
-            u'768d706357ee86826c3c692e6b9aa6817'
+            '79a3a5291c94340ff0058a631906375'
+            '768d706357ee86826c3c692e6b9aa6817'
         )
-        payload = u'{ "a": 1 }'
+        payload = '{ "a": 1 }'
 
-        self.assertFalse(is_webhook_authentic(u'secret', payload, u'XXX'))
-        self.assertTrue(is_webhook_authentic(u'secret', payload, signature))
-        self.assertFalse(is_webhook_authentic(u'secret?', payload, signature))
+        self.assertFalse(is_webhook_authentic('secret', payload, 'XXX'))
+        self.assertTrue(is_webhook_authentic('secret', payload, signature))
+        self.assertFalse(is_webhook_authentic('secret?', payload, signature))
         self.assertFalse(is_webhook_authentic(
             'secret', '{ "a": 2 }', signature)
         )
 
     def test_is_webhook_authentic_unicode_payload(self):
         signature = (
-            u'3040cf48ab225ca539c1d23841175bc2'
-            u'2e565cdb0975bd690ecaeca2c39dfcf7'
+            '3040cf48ab225ca539c1d23841175bc2'
+            '2e565cdb0975bd690ecaeca2c39dfcf7'
         )
 
         self.assertTrue(
