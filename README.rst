@@ -275,6 +275,30 @@ supply for the next page of results. If ``prev_cursor()`` returns
     # <class pybutton.Response [100 elements]>
 
 
+Utils
+---------
+
+Utils houses generic helpers useful in a Button Integration.
+
+is_webhook_authentic
+~~~~~~~~~~~~~~~~~~~
+
+Used to verify that requests sent to a webhook endpoint are from Button and that
+their payload can be trusted. Returns ``True`` if a webhook request body matches
+the sent signature and ``False`` otherwise.  See `Webhook Security <https://www.usebutton.com/developers/webhooks/#security>`__ for more details.
+
+.. code:: python
+
+    import os
+
+    from pybutton.utils import is_webhook_authentic
+
+    is_webhook_authentic(
+        os.environ['WEBHOOK_SECRET'],
+        request.data,
+        request.headers.get('X-Button-Signature')
+    )
+
 Contributing
 ------------
 
