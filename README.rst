@@ -280,7 +280,7 @@ Utils
 
 Utils houses generic helpers useful in a Button Integration.
 
-is_webhook_authentic
+#is_webhook_authentic
 ~~~~~~~~~~~~~~~~~~~
 
 Used to verify that requests sent to a webhook endpoint are from Button and that
