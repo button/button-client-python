@@ -3,6 +3,7 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import sys
 import hmac
 import hashlib
 
@@ -25,18 +26,36 @@ def is_webhook_authentic(webhook_secret, request_body, sent_signature):
         (bool) Whether or not the request is authentic
     '''
 
-    encoded_sent_signature = sent_signature.encode('utf8')
-
     computed_signature = hmac.new(
-      webhook_secret.encode('utf8'),
-      request_body.encode('utf8'),
+      as_bytes(webhook_secret),
+      as_bytes(request_body),
       hashlib.sha256
     ).hexdigest()
 
     if hasattr(hmac, 'compare_digest'):
         return hmac.compare_digest(
             computed_signature,
-            encoded_sent_signature
+            sent_signature
         )
 
-    return computed_signature == encoded_sent_signature
+    return computed_signature == sent_signature
+
+def as_bytes(v):
+    '''Converts v to a UTF-8 byte string if unicode, else returns identity.
+
+    Args:
+        v (str|unicode) the string to convert
+
+    Returns:
+        (byte string): A byte string copy, UTF-8 enccoded
+    '''
+
+    should_encode = (
+        sys.version_info[0] == 2 and isinstance(v, unicode)
+        or sys.version_info[0] == 3 and isinstance(v, str)
+    )
+
+    if should_encode:
+        return v.encode('utf8')
+
+    return v
