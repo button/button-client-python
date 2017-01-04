@@ -12,8 +12,8 @@ class UtilsTestCase(TestCase):
 
     def test_is_webhook_authentic(self):
         signature = (
-            '79a3a5291c94340ff0058a631906375'
-            '768d706357ee86826c3c692e6b9aa6817'
+            '79a3a5291c94340ff0058a6319063757'
+            '68d706357ee86826c3c692e6b9aa6817'
         )
         payload = '{ "a": 1 }'
 
