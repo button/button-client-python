@@ -3,7 +3,12 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from .orders import Orders
 from .accounts import Accounts
+from .merchants import Merchants
+from .orders import Orders
 
-__all__ = [Orders, Accounts]
+__all__ = [
+  Accounts,
+  Merchants,
+  Orders
+]
