@@ -144,7 +144,7 @@ All
 You may pass the following optional arguments:
 
 * ``status`` (string): Status to filter by.  One of ('approved', 'pending', or 'available')
-* ``currency`` (ISO-4217 datetime string): Currency code to filter returned rates by
+* ``currency`` (ISO-4217 string): Currency code to filter returned rates by
 
 .. code:: python
 
