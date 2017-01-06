@@ -1,3 +1,6 @@
+2.2.0 January 6, 2016
+  - Add merchants resource
+
 2.1.0 January 4, 2017
   - Add utils#is_webhook_authentic function
 
