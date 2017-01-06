@@ -87,7 +87,75 @@ The supported options are as follows:
 Resources
 ---------
 
-We currently expose two resources to manage, ``Orders`` and ``Accounts``.
+We currently expose the following resources to manage:
+
+* ``Accounts``
+* ``Merchants``
+* ``Orders``
+
+Accounts
+~~~~~~~~
+
+All
+'''
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.accounts.all()
+
+    print(response)
+    # <class pybutton.Response [2 elements]>
+
+Transactions
+''''''''''''
+
+Along with the required account ID, you may also
+pass the following optional arguments:
+
+* ``cursor`` (string): An API cursor to fetch a specific set of results.
+* ``start`` (ISO-8601 datetime string): Fetch transactions after this time.
+* ``end`` (ISO-8601 datetime string): Fetch transactions before this time.
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.accounts.transactions(
+        'acc-123',
+        start='2016-07-15T00:00:00.000Z',
+        end='2016-09-30T00:00:00.000Z'
+    )
+
+    print(response)
+    # <class pybutton.Response [100 elements]>
+
+Merchants
+~~~~~~~~~
+
+All
+'''
+
+You may pass the following optional arguments:
+
+* ``status`` (string): Partnership status to filter by.  One of ('approved', 'pending', or 'available')
+* ``currency`` (ISO-4217 string): Currency code to filter returned rates by
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.merchants.all()
+
+    print(response)
+    # <class pybutton.Response [23 elements]>
 
 Orders
 ~~~~~~
@@ -159,48 +227,6 @@ Delete
 
     print(response)
     # <class pybutton.Response >
-
-Accounts
-~~~~~~~~
-
-All
-'''
-
-.. code:: python
-
-    from pybutton import Client
-
-    client = Client('sk-XXX')
-
-    response = client.accounts.all()
-
-    print(response)
-    # <class pybutton.Response [2 elements]>
-
-Transactions
-''''''''''''
-
-Along with the required account ID, you may also
-pass the following optional arguments:
-
-* ``cursor`` (string): An API cursor to fetch a specific set of results.
-* ``start`` (ISO-8601 datetime string): Fetch transactions after this time.
-* ``end`` (ISO-8601 datetime string): Fetch transactions before this time.
-
-.. code:: python
-
-    from pybutton import Client
-
-    client = Client('sk-XXX')
-
-    response = client.accounts.transactions(
-        'acc-123',
-        start='2016-07-15T00:00:00.000Z',
-        end='2016-09-30T00:00:00.000Z'
-    )
-
-    print(response)
-    # <class pybutton.Response [100 elements]>
 
 Response
 --------
