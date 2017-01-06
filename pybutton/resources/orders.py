@@ -9,7 +9,7 @@ from .resource import Resource
 class Orders(Resource):
     '''Manages interacting with Button Orders via the Button API
 
-    See Resouce for class docstring.
+    See Resource for class docstring.
 
     '''
 

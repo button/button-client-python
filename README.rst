@@ -143,7 +143,7 @@ All
 
 You may pass the following optional arguments:
 
-* ``status`` (string): Status to filter by.  One of ('approved', 'pending', or 'available')
+* ``status`` (string): Partnership status to filter by.  One of ('approved', 'pending', or 'available')
 * ``currency`` (ISO-4217 string): Currency code to filter returned rates by
 
 .. code:: python

@@ -9,7 +9,7 @@ from .resource import Resource
 class Merchants(Resource):
     '''Manages interacting with Button Merchants via the Button API
 
-    See Resouce for class docstring.
+    See Resource for class docstring.
 
     '''
 
