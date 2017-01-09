@@ -89,9 +89,9 @@ Resources
 
 We currently expose the following resources to manage:
 
-* ``Accounts``
-* ``Merchants``
-* ``Orders``
+* `Accounts`_
+* `Merchants`_
+* `Orders`_
 
 Accounts
 ~~~~~~~~
