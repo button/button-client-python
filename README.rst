@@ -336,4 +336,4 @@ Contributing
 -  Running lint: ``flake8``
 
 .. |Build Status| image:: https://travis-ci.org/button/button-client-python.svg?branch=master
-   :target: https://travis-ci.com/button/button-client-python
+   :target: https://travis-ci.org/button/button-client-python
