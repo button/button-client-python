@@ -8,7 +8,7 @@ from .merchants import Merchants
 from .orders import Orders
 
 __all__ = [
-  Accounts,
-  Merchants,
-  Orders
+    Accounts,
+    Merchants,
+    Orders
 ]

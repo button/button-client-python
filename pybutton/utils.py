@@ -27,9 +27,9 @@ def is_webhook_authentic(webhook_secret, request_body, sent_signature):
     '''
 
     computed_signature = hmac.new(
-      as_bytes(webhook_secret),
-      as_bytes(request_body),
-      hashlib.sha256
+        as_bytes(webhook_secret),
+        as_bytes(request_body),
+        hashlib.sha256
     ).hexdigest()
 
     if hasattr(hmac, 'compare_digest'):
