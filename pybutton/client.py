@@ -3,10 +3,10 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from .resources import Accounts
-from .resources import Merchants
-from .resources import Orders
-from .error import ButtonClientError
+from pybutton.resources import Accounts
+from pybutton.resources import Merchants
+from pybutton.resources import Orders
+from pybutton.error import ButtonClientError
 
 
 class Client(object):

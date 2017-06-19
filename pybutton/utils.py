@@ -27,9 +27,9 @@ def is_webhook_authentic(webhook_secret, request_body, sent_signature):
     '''
 
     computed_signature = hmac.new(
-      as_bytes(webhook_secret),
-      as_bytes(request_body),
-      hashlib.sha256
+        as_bytes(webhook_secret),
+        as_bytes(request_body),
+        hashlib.sha256
     ).hexdigest()
 
     if hasattr(hmac, 'compare_digest'):
@@ -60,8 +60,8 @@ def as_bytes(v, only_py_2=False):
         return v
 
     should_encode = (
-        python_version == 2 and isinstance(v, unicode)
-        or python_version == 3 and isinstance(v, str)
+        python_version == 2 and isinstance(v, unicode) or
+        python_version == 3 and isinstance(v, str)
     )
 
     if should_encode:

@@ -3,7 +3,7 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from .request import query_dict
+from pybutton.request import query_dict
 
 
 class Response(object):
