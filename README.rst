@@ -12,7 +12,7 @@ touch <https://www.usebutton.com/contact>`__.
 Supported runtimes
 ^^^^^^^^^^^^^^^^^^
 
--  cPython ``2.6``, ``2.7``, ``3.2``, ``3.3``, ``3.4``, ``3.5``
+-  cPython ``2.6``, ``2.7``, ``3.2``, ``3.3``, ``3.4``, ``3.5``, ``3.6``
 
 Dependencies
 ^^^^^^^^^^^^
