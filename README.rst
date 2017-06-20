@@ -334,6 +334,9 @@ Contributing
 -  Installing locally: ``python setup.py install``
 -  Running tests: ``python setup.py test`` (you'll need to `pip install flake8==3.3.0`)
 -  Running lint directly: ``flake8 pybutton``
+-  Running tests on all versions: ``tox``
+    - Pre-req: `pip install tox`
+    - Pre-req (if using pyenv): something like `pyenv local 2.7.10 2.6.9 3.1.5 3.3.6 3.4.6 3.5.3 3.6.0`
 
 .. |Build Status| image:: https://travis-ci.org/button/button-client-python.svg?branch=master
    :target: https://travis-ci.org/button/button-client-python
