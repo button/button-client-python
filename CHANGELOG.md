@@ -1,6 +1,7 @@
 Current Version
   - Add flake8 to test suite
   - Move /test directory inside package
+  - Migrate relative imports to package absolute
 
 2.2.0 January 6, 2016
   - Add merchants resource
