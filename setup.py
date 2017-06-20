@@ -3,7 +3,7 @@ from setuptools import setup
 # Python 2.6 will error exiting nosetests via multiprocessing without this
 # import, as arbitrary as it seems.
 #
-import multiprocessing # noqa
+import multiprocessing  # noqa
 
 from pybutton import VERSION
 

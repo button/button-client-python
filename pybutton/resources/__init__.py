@@ -3,12 +3,12 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from .accounts import Accounts
-from .merchants import Merchants
-from .orders import Orders
+from pybutton.resources.accounts import Accounts
+from pybutton.resources.merchants import Merchants
+from pybutton.resources.orders import Orders
 
 __all__ = [
-  Accounts,
-  Merchants,
-  Orders
+    Accounts,
+    Merchants,
+    Orders
 ]

@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import sys
 import json
 
-from .error import ButtonClientError
+from pybutton.error import ButtonClientError
 
 # `pybutton.request` will expose 4 attributes, all specific to the major
 # version of the interpreter:
@@ -151,6 +151,7 @@ def query_dict(url):
     if (url_components):
         query_string = url_components.query
         return parse_qs(query_string)
+
 
 __all__ = [
     Request,

@@ -332,8 +332,8 @@ Contributing
 -  Building the wheel: ``python setup.py bdist_wheel --universal``
 -  Building the sdist: ``python setup.py sdist``
 -  Installing locally: ``python setup.py install``
--  Running tests: ``python setup.py test``
--  Running lint: ``flake8``
+-  Running tests: ``python setup.py test`` (you'll need to `pip install flake8==3.3.0`)
+-  Running lint directly: ``flake8 pybutton``
 
 .. |Build Status| image:: https://travis-ci.org/button/button-client-python.svg?branch=master
    :target: https://travis-ci.org/button/button-client-python
