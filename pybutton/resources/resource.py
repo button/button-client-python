@@ -82,6 +82,23 @@ class Resource(object):
         '''
         return self._api_request(path, 'DELETE')
 
+    def _headers(self):
+        '''Generate the HTTP headers used for a request
+        '''
+
+        api_key_bytes = '{0}:'.format(self.api_key).encode()
+        authorization = b64encode(api_key_bytes).decode()
+
+        headers = {
+            'Authorization': 'Basic {0}'.format(authorization),
+            'User-Agent': USER_AGENT,
+        }
+
+        if self.config['api_version']:
+            headers['X-Button-API-Version'] = self.config['api_version']
+
+        return headers
+
     def _api_request(self, path, method, data=None, query=None):
         '''Make an HTTP request
 
@@ -107,19 +124,12 @@ class Resource(object):
             path,
             query,
         )
-        api_key_bytes = '{0}:'.format(self.api_key).encode()
-        authorization = b64encode(api_key_bytes).decode()
-
-        headers = {
-            'Authorization': 'Basic {0}'.format(authorization),
-            'User-Agent': USER_AGENT,
-        }
 
         try:
             resp = request(
                 url,
                 method,
-                headers,
+                self._headers(),
                 data,
                 self.config['timeout'],
             )

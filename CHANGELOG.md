@@ -1,4 +1,5 @@
 Current Version
+  - Add api_version to Client config
   - Add tox
   - Add support for python3.6
   - Add flake8 to test suite
