@@ -1,4 +1,7 @@
 Current Version
+  -
+
+2.3.0 June 22, 2017
   - Add api_version to Client config
   - Add tox
   - Add support for python3.6
