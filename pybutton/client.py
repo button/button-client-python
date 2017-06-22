@@ -27,6 +27,7 @@ class Client(object):
               Defaults to None.
               (N.B: Button's API is only exposed through HTTPS. This option is
               provided purely as a convenience for testing and development.)
+            api_version: A specific API version label to use for the request
 
     Attributes:
         orders (pybutton.Resource): Resource for managing Button Orders.
@@ -63,4 +64,5 @@ def config_with_defaults(config):
         'timeout': config.get('timeout'),
         'hostname': config.get('hostname', 'api.usebutton.com'),
         'port': config.get('port', defaultPort),
+        'api_version': config.get('api_version'),
     }

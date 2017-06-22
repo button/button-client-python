@@ -16,6 +16,7 @@ config = {
     'secure': True,
     'port': 443,
     'timeout': None,
+    'api_version': None
 }
 
 
@@ -34,6 +35,7 @@ class ResourceTestCase(TestCase):
         self.assertEqual(args[1], 'GET')
         self.assertTrue(len(args[2]['User-Agent']) != 0)
         self.assertEqual(args[2]['Authorization'], 'Basic c2stWFhYOg==')
+        self.assertTrue('X-Button-API-Version' not in args[2])
         self.assertEqual(args[3], None)
 
     @patch('pybutton.resources.resource.request')
@@ -81,6 +83,23 @@ class ResourceTestCase(TestCase):
         self.assertTrue(len(args[2]['User-Agent']) != 0)
         self.assertEqual(args[2]['Authorization'], 'Basic c2stWFhYOg==')
         self.assertEqual(args[3], data)
+
+    @patch('pybutton.resources.resource.request')
+    def test_api_request_with_api_version(self, request):
+        config = {
+            'hostname': 'api.usebutton.com',
+            'secure': True,
+            'port': 443,
+            'timeout': None,
+            'api_version': '2017-01-01'
+        }
+
+        request.return_value = {'object': {}}
+        resource = Resource('sk-XXX', config)
+        resource._api_request('/v2/api', 'GET')
+
+        args = request.call_args[0]
+        self.assertEqual(args[2]['X-Button-API-Version'], '2017-01-01')
 
     @patch('pybutton.resources.resource.request')
     def test_api_request_with_error(self, request):
