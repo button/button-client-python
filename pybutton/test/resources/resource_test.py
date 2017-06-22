@@ -16,7 +16,7 @@ config = {
     'secure': True,
     'port': 443,
     'timeout': None,
-    'api_version': None
+    'api_version': None,
 }
 
 
@@ -91,7 +91,7 @@ class ResourceTestCase(TestCase):
             'secure': True,
             'port': 443,
             'timeout': None,
-            'api_version': '2017-01-01'
+            'api_version': '2017-01-01',
         }
 
         request.return_value = {'object': {}}

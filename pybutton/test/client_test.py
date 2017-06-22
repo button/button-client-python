@@ -44,7 +44,7 @@ class ClientTestCase(TestCase):
             'port': 443,
             'secure': True,
             'timeout': None,
-            'api_version': None
+            'api_version': None,
         })
 
         # Port and timeout overrides
@@ -58,7 +58,7 @@ class ClientTestCase(TestCase):
             'port': 88,
             'secure': True,
             'timeout': 5,
-            'api_version': None
+            'api_version': None,
         })
 
         # Hostname and secure overrides
@@ -72,11 +72,11 @@ class ClientTestCase(TestCase):
             'port': 80,
             'secure': False,
             'timeout': None,
-            'api_version': None
+            'api_version': None,
         })
 
         config = config_with_defaults({
-            'api_version': '2017-01-01'
+            'api_version': '2017-01-01',
         })
 
         self.assertEqual(config, {
@@ -84,5 +84,5 @@ class ClientTestCase(TestCase):
             'port': 443,
             'secure': True,
             'timeout': None,
-            'api_version': '2017-01-01'
+            'api_version': '2017-01-01',
         })
