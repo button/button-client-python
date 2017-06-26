@@ -182,7 +182,7 @@ Create
         'customer': {
             'id': 'mycustomer-1234',
             'email_sha256': hashlib.sha256("user@example.com".lower().strip()).hexdigest()
-        },
+        }
     })
 
     print(response)
