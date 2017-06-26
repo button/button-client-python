@@ -169,9 +169,12 @@ Create
 
 .. code:: python
 
+    import hashlib
     from pybutton import Client
 
     client = Client('sk-XXX')
+    
+    hashed_email = hashlib.sha256('user@example.com'.lower().strip()).hexdigest()
 
     response = client.orders.create({
         'total': 50,
@@ -181,8 +184,8 @@ Create
         'btn_ref': 'srctok-XXX',
         'customer': {
             'id': 'mycustomer-1234',
-            'email_sha256': hashlib.sha256("user@example.com".lower().strip()).hexdigest()
-        }
+            'email_sha256': hashed_email,
+        },
     })
 
     print(response)
