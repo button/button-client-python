@@ -179,6 +179,10 @@ Create
         'order_id': '2007',
         'finalization_date': '2017-08-02T19:26:08Z',
         'btn_ref': 'srctok-XXX',
+        'customer': {
+            'id': 'mycustomer-1234',
+            'email_sha256': hashlib.sha256("user@example.com".lower().strip()).hexdigest()
+        },
     })
 
     print(response)
