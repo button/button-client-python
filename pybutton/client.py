@@ -4,6 +4,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 from pybutton.resources import Accounts
+from pybutton.resources import Customers
 from pybutton.resources import Merchants
 from pybutton.resources import Orders
 from pybutton.error import ButtonClientError
@@ -53,6 +54,7 @@ class Client(object):
         self.orders = Orders(api_key, config)
         self.accounts = Accounts(api_key, config)
         self.merchants = Merchants(api_key, config)
+        self.customers = Customers(api_key, config)
 
 
 def config_with_defaults(config):
