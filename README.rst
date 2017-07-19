@@ -237,7 +237,7 @@ Delete
     # <class pybutton.Response >
 
 Customers
-~~~~~~
+~~~~~~~~~
 
 Create
 ''''''
@@ -254,11 +254,10 @@ Create
     response = client.customers.create({
         'id': 'customer-1234',
         'email_sha256': hashed_email,
-        'advertising_id': '6E82078A-8146-4BA4-AC5B-76104861E61A',
     })
 
     print(response)
-    # <class pybutton.Response id: 'customer-1234', ...>
+    # <class pybutton.Response id: customer-1234, ...>
 
 Get
 '''
@@ -269,10 +268,10 @@ Get
 
     client = Client('sk-XXX')
 
-    response = client.customers.get('customer-XXX')
+    response = client.customers.get('customer-1234')
 
     print(response)
-    # <class pybutton.Response id: customer-XXX, segments:[], ...>
+    # <class pybutton.Response id: customer-1234, ...>
 
 Response
 --------
