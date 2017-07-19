@@ -92,6 +92,7 @@ We currently expose the following resources to manage:
 * `Accounts`_
 * `Merchants`_
 * `Orders`_
+* `Customers`_
 
 Accounts
 ~~~~~~~~
@@ -173,7 +174,7 @@ Create
     from pybutton import Client
 
     client = Client('sk-XXX')
-    
+
     hashed_email = hashlib.sha256('user@example.com'.lower().strip()).hexdigest()
 
     response = client.orders.create({
@@ -234,6 +235,43 @@ Delete
 
     print(response)
     # <class pybutton.Response >
+
+Customers
+~~~~~~~~~
+
+Create
+''''''
+
+.. code:: python
+
+    import hashlib
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    hashed_email = hashlib.sha256('user@example.com'.lower().strip()).hexdigest()
+
+    response = client.customers.create({
+        'id': 'customer-1234',
+        'email_sha256': hashed_email,
+    })
+
+    print(response)
+    # <class pybutton.Response id: customer-1234, ...>
+
+Get
+'''
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.customers.get('customer-1234')
+
+    print(response)
+    # <class pybutton.Response id: customer-1234, ...>
 
 Response
 --------
