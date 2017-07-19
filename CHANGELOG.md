@@ -1,6 +1,9 @@
 Current Version
   -
 
+2.4.0 July 19, 2017
+  - Add customers resource
+
 2.3.0 June 22, 2017
   - Add api_version to Client config
   - Add tox
