@@ -276,36 +276,6 @@ Get Info
     print(response)
     # <class pybutton.Response merchant_id: org-XXXXXXXXXXXXXXX, ...>
 
-Update
-''''''
-
-.. code:: python
-
-    from pybutton import Client
-
-    client = Client('sk-XXX')
-
-    response = client.orders.update('btnorder-XXX', {
-        'total': 60,
-    })
-
-    print(response)
-    # <class pybutton.Response total: 60, currency: 'USD', ...>
-
-Delete
-''''''
-
-.. code:: python
-
-    from pybutton import Client
-
-    client = Client('sk-XXX')
-
-    response = client.orders.delete('btnorder-XXX')
-
-    print(response)
-    # <class pybutton.Response >
-
 Customers
 ~~~~~~~~~
 
