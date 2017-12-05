@@ -45,4 +45,4 @@ class LinksTestCase(TestCase):
                 response = link.create(link_payload)
 
             self.assertEqual(response, link_response)
-            api_post.assert_called_with('/v1/links/info', link_payload)
+            api_post.assert_called_with('/v1/links', link_payload)
