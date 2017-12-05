@@ -93,6 +93,7 @@ We currently expose the following resources to manage:
 * `Merchants`_
 * `Orders`_
 * `Customers`_
+* `Links`_
 
 Accounts
 ~~~~~~~~
@@ -205,6 +206,75 @@ Get
 
     print(response)
     # <class pybutton.Response total: 50, currency: 'USD', ...>
+
+Update
+''''''
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.orders.update('btnorder-XXX', {
+        'total': 60,
+    })
+
+    print(response)
+    # <class pybutton.Response total: 60, currency: 'USD', ...>
+
+Delete
+''''''
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.orders.delete('btnorder-XXX')
+
+    print(response)
+    # <class pybutton.Response >
+
+Links
+~~~~~~
+
+Create
+''''''
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.links.create({
+        'url': 'https://www.jet.com',
+        "experience": {
+            'btn_pub_ref': 'my-pub-ref',
+            'btn_pub_user': 'user-id',
+        },
+    })
+
+    print(response)
+    # <class pybutton.Response merchant_id: org-XXXXXXXXXXXXXXX, ...>
+
+Get Info
+'''
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    rresponse = client.links.get_info({
+        "url": "https://www.jet.com",
+    })
+
+    print(response)
+    # <class pybutton.Response merchant_id: org-XXXXXXXXXXXXXXX, ...>
 
 Update
 ''''''

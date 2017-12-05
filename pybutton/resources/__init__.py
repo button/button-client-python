@@ -7,10 +7,12 @@ from pybutton.resources.accounts import Accounts
 from pybutton.resources.customers import Customers
 from pybutton.resources.merchants import Merchants
 from pybutton.resources.orders import Orders
+from pybutton.resources.links import Links
 
 __all__ = [
     Accounts,
     Customers,
     Merchants,
-    Orders
+    Orders,
+    Links
 ]
