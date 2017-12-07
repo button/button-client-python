@@ -1,6 +1,9 @@
 Current Version
   -
 
+2.5.0 December 5, 2017
+  - Add links resource
+
 2.4.0 July 19, 2017
   - Add customers resource
 
