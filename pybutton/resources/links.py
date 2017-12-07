@@ -13,7 +13,7 @@ class Links(Resource):
 
     '''
 
-    def _path(self, link=None):
+    def _path(self):
         '''Format a url path
 
         Args:

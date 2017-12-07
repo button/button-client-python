@@ -5,14 +5,14 @@ from __future__ import unicode_literals
 
 from pybutton.resources.accounts import Accounts
 from pybutton.resources.customers import Customers
+from pybutton.resources.links import Links
 from pybutton.resources.merchants import Merchants
 from pybutton.resources.orders import Orders
-from pybutton.resources.links import Links
 
 __all__ = [
     Accounts,
     Customers,
+    Links,
     Merchants,
-    Orders,
-    Links
+    Orders
 ]

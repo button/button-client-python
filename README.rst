@@ -269,7 +269,7 @@ Get Info
 
     client = Client('sk-XXX')
 
-    rresponse = client.links.get_info({
+    response = client.links.get_info({
         "url": "https://www.jet.com",
     })
 
