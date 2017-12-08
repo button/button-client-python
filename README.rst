@@ -261,7 +261,7 @@ Create
     # <class pybutton.Response merchant_id: org-XXXXXXXXXXXXXXX, ...>
 
 Get Info
-'''
+''''''''
 
 .. code:: python
 
