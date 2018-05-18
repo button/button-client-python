@@ -8,7 +8,7 @@ from platform import python_version
 import json
 
 from pybutton.response import Response
-from pybutton.error import ButtonClientError
+from pybutton.error import HTTPResponseError
 from pybutton.version import VERSION
 from pybutton.request import request
 from pybutton.request import request_url
@@ -38,6 +38,7 @@ class Resource(object):
 
     Raises:
         pybutton.ButtonClientError
+        pybutton.HTTPResponseError
 
     '''
 
@@ -151,4 +152,4 @@ class Resource(object):
 
             error = json.loads(data).get('error', {})
             message = error.get('message', fallback)
-            raise ButtonClientError(message)
+            raise HTTPResponseError(message, status_code=e.code, cause=e)

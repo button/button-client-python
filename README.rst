@@ -37,7 +37,7 @@ key <https://app.usebutton.com/settings/organization>`__.
     client = Client('sk-XXX')
 
 The client will always attempt to raise a ``pybutton.ButtonClientError``
-in an error condition.
+or a subclass in an error condition.
 
 All API requests will return a ``pybutton.response.Response`` instance,
 which supports accessing data via the `#data` method.  For instance:
@@ -45,20 +45,22 @@ which supports accessing data via the `#data` method.  For instance:
 .. code:: python
 
     from pybutton import Client
-    from pybutton import ButtonClientError
+    from pybutton import ButtonClientError, HTTPResponseError
 
     client = Client("sk-XXX")
 
     try:
         response = client.orders.get("btnorder-XXX")
+    except HTTPResponseError as e:
+        print('API request failed: http status {}'.format(e.status_code))
     except ButtonClientError as e:
         print(e)
+    else:
+        print(response)
+        # <class pybutton.Response status: open, btn_ref: None, line_items: [], ...>
 
-    print(response)
-    # <class pybutton.Response status: open, btn_ref: None, line_items: [], ...>
-
-    print(response.data())
-    # {'status': open, 'btn_ref': None, 'line_items': [], ...}
+        print(response.data())
+        # {'status': open, 'btn_ref': None, 'line_items': [], ...}
 
 
 Configuration

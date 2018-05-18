@@ -9,7 +9,7 @@ from mock import patch
 
 from pybutton.request import HTTPError
 from pybutton.resources.resource import Resource
-from pybutton.error import ButtonClientError
+from pybutton.error import HTTPResponseError
 
 config = {
     'hostname': 'api.usebutton.com',
@@ -117,8 +117,10 @@ class ResourceTestCase(TestCase):
         try:
             resource._api_request('/v2/api', 'GET', data)
             self.assertTrue(False)
-        except ButtonClientError as e:
+        except HTTPResponseError as e:
             self.assertEqual(str(e), '404 bloop')
+            self.assertEqual(e.status_code, 404)
+            self.assertTrue(e.cause is not None)
 
     @patch('pybutton.resources.resource.request')
     def test_api_request_with_byte_response(self, request):
@@ -138,8 +140,10 @@ class ResourceTestCase(TestCase):
         try:
             resource._api_request('/v2/api', 'GET', data)
             self.assertTrue(False)
-        except ButtonClientError as e:
+        except HTTPResponseError as e:
             self.assertEqual(str(e), 'bloop failed')
+            self.assertEqual(e.status_code, 404)
+            self.assertTrue(e.cause is not None)
 
     @patch('pybutton.resources.resource.request')
     def test_api_get(self, request):
