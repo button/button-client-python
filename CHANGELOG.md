@@ -1,3 +1,6 @@
+Current Version
+  -
+
 2.6.0 May 17, 2018
   - Added `HTTPResponseError`
 
