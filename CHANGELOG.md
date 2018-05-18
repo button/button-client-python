@@ -1,5 +1,5 @@
 Current Version
-  -
+  - Added `HTTPResponseError`
 
 2.5.0 December 5, 2017
   - Add links resource

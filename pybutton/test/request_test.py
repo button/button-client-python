@@ -103,8 +103,10 @@ class RequestTestCasePy2(TestCase):
             try:
                 request(url, method, headers)
                 self.assertTrue(False)
-            except ButtonClientError:
-                pass
+            except ButtonClientError as e:
+                # We expect the generic ButtonClientError, and not a subclass,
+                # in this condition.
+                assert type(e) is ButtonClientError
 
 
 class RequestTestCasePy3(TestCase):
