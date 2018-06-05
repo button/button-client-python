@@ -64,7 +64,7 @@ if sys.version_info[0] == 3:
 else:
     from urllib2 import Request
     from urllib2 import urlopen
-    from urllib2 import HTTPError
+    from urllib2 import HTTPError # noqa: 401
     from urllib import urlencode
     from urlparse import urlunsplit
     from urlparse import urlparse
@@ -151,13 +151,3 @@ def query_dict(url):
     if (url_components):
         query_string = url_components.query
         return parse_qs(query_string)
-
-
-__all__ = [
-    Request,
-    urlopen,
-    HTTPError,
-    request,
-    request_url,
-    query_dict,
-]
