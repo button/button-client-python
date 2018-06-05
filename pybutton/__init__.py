@@ -3,7 +3,7 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from pybutton.client import Client
-from pybutton.error import ButtonClientError
-from pybutton.error import HTTPResponseError
-from pybutton.version import VERSION
+from pybutton.client import Client # noqa: 401
+from pybutton.error import ButtonClientError # noqa: 401
+from pybutton.error import HTTPResponseError # noqa: 401
+from pybutton.version import VERSION # noqa: 401

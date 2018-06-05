@@ -64,7 +64,7 @@ if sys.version_info[0] == 3:
 else:
     from urllib2 import Request
     from urllib2 import urlopen
-    from urllib2 import HTTPError
+    from urllib2 import HTTPError # noqa: 401
     from urllib import urlencode
     from urlparse import urlunsplit
     from urlparse import urlparse
