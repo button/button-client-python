@@ -151,13 +151,3 @@ def query_dict(url):
     if (url_components):
         query_string = url_components.query
         return parse_qs(query_string)
-
-
-__all__ = [
-    Request,
-    urlopen,
-    HTTPError,
-    request,
-    request_url,
-    query_dict,
-]

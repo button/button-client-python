@@ -1,6 +1,10 @@
 Current Version
   -
 
+2.6.1 June 5, 2018
+  - Added `HTTPResponseError` to top-level import
+  - Remove `__all__` imports: they never worked
+
 2.6.0 May 17, 2018
   - Added `HTTPResponseError`
 

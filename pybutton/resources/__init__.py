@@ -8,11 +8,3 @@ from pybutton.resources.customers import Customers
 from pybutton.resources.links import Links
 from pybutton.resources.merchants import Merchants
 from pybutton.resources.orders import Orders
-
-__all__ = [
-    Accounts,
-    Customers,
-    Links,
-    Merchants,
-    Orders
-]

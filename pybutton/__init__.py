@@ -5,6 +5,5 @@ from __future__ import unicode_literals
 
 from pybutton.client import Client
 from pybutton.error import ButtonClientError
+from pybutton.error import HTTPResponseError
 from pybutton.version import VERSION
-
-__all__ = [Client, ButtonClientError, VERSION]
