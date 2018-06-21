@@ -26,7 +26,8 @@ class Accounts(Resource):
 
         return self.api_get('/v1/affiliation/accounts')
 
-    def transactions(self, account_id, cursor=None, start=None, end=None, time_field=None):
+    def transactions(self, account_id, cursor=None, start=None, end=None,
+                     time_field=None):
         '''Get a list of transactions.
         To paginate transactions, pass the result of response.next_cursor() as
         the cursor argument.
