@@ -123,6 +123,7 @@ pass the following optional arguments:
 * ``cursor`` (string): An API cursor to fetch a specific set of results.
 * ``start`` (ISO-8601 datetime string): Fetch transactions after this time.
 * ``end`` (ISO-8601 datetime string): Fetch transactions before this time.
+* ``time_field`` (string): Which time field ``start`` and ``end`` filter on.
 
 .. code:: python
 
