@@ -58,3 +58,14 @@ class AccountsTestCase(TestCase):
                 self.assertEqual(query['cursor'], 'abc')
                 self.assertEqual(query['start'], '2016-09-15T00:00:00.000Z')
                 self.assertEqual(query['end'], '2016-09-30T00:00:00.000Z')
+
+                response = account.transactions(
+                    'acc-123',
+                    cursor='abc',
+                    start='2016-09-15T00:00:00.000Z',
+                    end='2016-09-30T00:00:00.000Z',
+                    time_field='created_date'
+                )
+                self.assertEqual(response, account_response)
+                query = api_get.call_args[1]['query']
+                self.assertEqual(query['time_field'], 'created_date')

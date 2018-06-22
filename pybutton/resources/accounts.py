@@ -26,7 +26,8 @@ class Accounts(Resource):
 
         return self.api_get('/v1/affiliation/accounts')
 
-    def transactions(self, account_id, cursor=None, start=None, end=None):
+    def transactions(self, account_id, cursor=None, start=None, end=None,
+                     time_field=None):
         '''Get a list of transactions.
         To paginate transactions, pass the result of response.next_cursor() as
         the cursor argument.
@@ -40,6 +41,8 @@ class Accounts(Resource):
                 created at or after this time.
             end (ISO-8601 datetime str) optional: Filter out transactions
                 created before this time.
+            time_field (str) optional: Which time field ``start`` and ``end``
+                filter on
 
         Raises:
             pybutton.ButtonClientError
@@ -57,6 +60,8 @@ class Accounts(Resource):
             query['start'] = start
         if end:
             query['end'] = end
+        if time_field:
+            query['time_field'] = time_field
 
         path = '/v1/affiliation/accounts/{0}/transactions'.format(
             account_id

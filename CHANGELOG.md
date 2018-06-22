@@ -1,6 +1,9 @@
 Current Version
   -
 
+2.7.0 June 21, 2018
+  - Added optional `time_field` argument to `client.accounts.transactions`
+
 2.6.1 June 5, 2018
   - Added `HTTPResponseError` to top-level import
   - Remove `__all__` imports: they never worked
