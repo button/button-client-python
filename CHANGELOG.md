@@ -1,5 +1,5 @@
 Current Version
-  -
+  - Drop official support for Python 2.6, 3.2, 3.3
 
 2.7.0 June 21, 2018
   - Added optional `time_field` argument to `client.accounts.transactions`
