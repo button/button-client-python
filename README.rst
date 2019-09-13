@@ -12,7 +12,7 @@ touch <https://www.usebutton.com/contact>`__.
 Supported runtimes
 ^^^^^^^^^^^^^^^^^^
 
--  cPython ``2.6``, ``2.7``, ``3.2``, ``3.3``, ``3.4``, ``3.5``, ``3.6``
+-  cPython ``2.7``, ``3.4``, ``3.5``, ``3.6``, ``3.7``
 
 Dependencies
 ^^^^^^^^^^^^
@@ -423,7 +423,7 @@ Contributing
 *  Installing locally: ``python setup.py install``
 *  Running tests: ``python setup.py test`` (you'll need to ``pip install flake8==3.3.0``)
 *  Running lint directly: ``flake8 pybutton``
-*  Running tests on all versions: ``tox`` (need to ``pip install tox`` and something like ``pyenv local 2.7.10 2.6.9 3.1.5 3.3.6 3.4.6 3.5.3 3.6.0`` if using ``pyenv``)
+*  Running tests on all versions: ``tox`` (need to ``pip install tox`` and something like ``pyenv local 2.7.10 3.4.6 3.5.3 3.6.0`` if using ``pyenv``)
 
 .. |Build Status| image:: https://travis-ci.org/button/button-client-python.svg?branch=master
    :target: https://travis-ci.org/button/button-client-python
