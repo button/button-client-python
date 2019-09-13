@@ -7,14 +7,14 @@ from pybutton.resources.resource import Resource
 
 
 class Accounts(Resource):
-    '''Manages interacting with Button Accounts via the Button API
+    """Manages interacting with Button Accounts via the Button API
 
     See Resource for class docstring.
 
-    '''
+    """
 
     def all(self):
-        '''Get a list of available accounts
+        """Get a list of available accounts
 
         Raises:
             pybutton.ButtonClientError
@@ -22,13 +22,13 @@ class Accounts(Resource):
         Returns:
             (pybutton.Response) The API response
 
-        '''
+        """
 
         return self.api_get('/v1/affiliation/accounts')
 
     def transactions(self, account_id, cursor=None, start=None, end=None,
                      time_field=None):
-        '''Get a list of transactions.
+        """Get a list of transactions.
         To paginate transactions, pass the result of response.next_cursor() as
         the cursor argument.
 
@@ -50,7 +50,7 @@ class Accounts(Resource):
         Returns:
             (pybutton.Response) The API response
 
-        '''
+        """
 
         query = {}
 

@@ -12,7 +12,7 @@ from pybutton.error import ButtonClientError
 
 
 class Client(object):
-    '''Top-level interface for making requests to the Button API.
+    """Top-level interface for making requests to the Button API.
 
     All resources implemented in this client will be exposed as attributes of a
     pybutton.Client instance.
@@ -37,7 +37,7 @@ class Client(object):
     Raises:
         pybutton.ButtonClientError
 
-    '''
+    """
 
     def __init__(self, api_key, config=None):
 
