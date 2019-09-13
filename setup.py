@@ -22,7 +22,7 @@ setup(
     include_package_data=False,
     license='MIT',
     test_suite='nose.collector',
-    tests_require=['nose', 'mock'],
+    tests_require=['nose', 'mock', "flake8-quotes==2.1.0"],
     zip_safe=True,
     classifiers=[
         "Intended Audience :: Developers",
