@@ -1,4 +1,5 @@
 Current Version
+  - Add official support for Python 3.7
   - Drop official support for Python 2.6, 3.2, 3.3
 
 2.7.0 June 21, 2018
