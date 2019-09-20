@@ -36,7 +36,7 @@ class RequestTestCasePy2(TestCase):
             MockRequest.assert_called_with(url)
             self.assertEqual(instance.get_method(), method)
             instance.add_header.assert_called_with('b', 2)
-            self.assertEqual(response, {"a": 1})
+            self.assertEqual(response, {'a': 1})
 
     @patch('pybutton.request.urlopen')
     @patch('pybutton.request.Request')
@@ -56,7 +56,7 @@ class RequestTestCasePy2(TestCase):
 
             MockRequest.assert_called_with(url)
             self.assertEqual(instance.get_method(), method)
-            self.assertEqual(response, {"a": 1})
+            self.assertEqual(response, {'a': 1})
 
     @patch('pybutton.request.urlopen')
     @patch('pybutton.request.Request')
@@ -85,7 +85,7 @@ class RequestTestCasePy2(TestCase):
                 'application/json'
             )
 
-            self.assertEqual(response, {"a": 1})
+            self.assertEqual(response, {'a': 1})
 
     @patch('pybutton.request.urlopen')
     @patch('pybutton.request.Request')
@@ -129,7 +129,7 @@ class RequestTestCasePy3(TestCase):
 
             MockRequest.assert_called_with(url, data=None, headers=headers)
             self.assertEqual(instance.get_method(), method)
-            self.assertEqual(response, {"a": 1})
+            self.assertEqual(response, {'a': 1})
 
     @patch('pybutton.request.urlopen')
     @patch('pybutton.request.Request')
@@ -149,7 +149,7 @@ class RequestTestCasePy3(TestCase):
 
             MockRequest.assert_called_with(url, data=None, headers=headers)
             self.assertEqual(instance.get_method(), method)
-            self.assertEqual(response, {"a": 1})
+            self.assertEqual(response, {'a': 1})
 
     @patch('pybutton.request.urlopen')
     @patch('pybutton.request.Request')
@@ -181,7 +181,7 @@ class RequestTestCasePy3(TestCase):
                 'application/json'
             )
 
-            self.assertEqual(response, {"a": 1})
+            self.assertEqual(response, {'a': 1})
 
     @patch('pybutton.request.urlopen')
     @patch('pybutton.request.Request')

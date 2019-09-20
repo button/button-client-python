@@ -26,7 +26,7 @@ if sys.version_info[0] == 3:
     from urllib.parse import parse_qs
 
     def request(url, method, headers, data=None, timeout=None):
-        ''' Make an HTTP request in Python 3.x
+        """ Make an HTTP request in Python 3.x
 
         This method will abstract the underlying organization and invocation of
         the Python 3 HTTP standard lib implementation.
@@ -45,7 +45,7 @@ if sys.version_info[0] == 3:
         Returns:
             (dict): The response from the server interpreted as JSON.
 
-        '''
+        """
 
         encoded_data = json.dumps(data).encode('utf8') if data else None
         request = Request(url, data=encoded_data, headers=headers)
@@ -71,7 +71,7 @@ else:
     from urlparse import parse_qs
 
     def request(url, method, headers, data=None, timeout=None):
-        ''' Make an HTTP request in Python 2.x
+        """ Make an HTTP request in Python 2.x
 
         This method will abstract the underlying organization and invocation of
         the Python 2 HTTP standard lib implementation.
@@ -90,7 +90,7 @@ else:
         Returns:
             (dict): The response from the server interpreted as JSON.
 
-        '''
+        """
 
         request = Request(url)
         request.get_method = lambda: method
@@ -111,7 +111,7 @@ else:
 
 
 def request_url(secure, hostname, port, path, query=None):
-    '''
+    """
         Combines url components into a url passable into the request function.
 
         Args:
@@ -123,7 +123,7 @@ def request_url(secure, hostname, port, path, query=None):
 
         Returns:
             (str) A complete url made up of the arguments.
-    '''
+    """
     encoded_query = urlencode(query) if query else ''
     scheme = 'https' if secure else 'http'
     netloc = '{0}:{1}'.format(hostname, port)
@@ -132,7 +132,7 @@ def request_url(secure, hostname, port, path, query=None):
 
 
 def query_dict(url):
-    '''
+    """
         Given a url, returns a dictionary of its query parameters.
 
         Args:
@@ -145,7 +145,7 @@ def query_dict(url):
               ...
             }
 
-    '''
+    """
     url_components = urlparse(url)
 
     if (url_components):

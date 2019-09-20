@@ -127,9 +127,9 @@ class ResourceTestCase(TestCase):
         data = {'c': 3}
 
         fp = Mock()
-        fp.read.return_value = '''
+        fp.read.return_value = """
             { "error": { "message": "bloop failed" } }
-        '''.encode()
+        """.encode()
 
         def side_effect(*args):
             raise HTTPError('url', 404, 'bloop', {}, fp)

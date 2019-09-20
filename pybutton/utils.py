@@ -9,7 +9,7 @@ import hashlib
 
 
 def is_webhook_authentic(webhook_secret, request_body, sent_signature):
-    '''Used to verify that requests sent to a webhook endpoint are from Button
+    """Used to verify that requests sent to a webhook endpoint are from Button
     and that their payload can be trusted. Returns True if a webhook request
     body matches the sent signature and False otherwise.
 
@@ -24,7 +24,7 @@ def is_webhook_authentic(webhook_secret, request_body, sent_signature):
 
     Returns:
         (bool) Whether or not the request is authentic
-    '''
+    """
 
     computed_signature = hmac.new(
         as_bytes(webhook_secret),
@@ -42,7 +42,7 @@ def is_webhook_authentic(webhook_secret, request_body, sent_signature):
 
 
 def as_bytes(v, only_py_2=False):
-    '''Converts v to a UTF-8 byte string if unicode, else returns identity.
+    """Converts v to a UTF-8 byte string if unicode, else returns identity.
 
     Args:
         v (str|unicode): the string to convert
@@ -52,7 +52,7 @@ def as_bytes(v, only_py_2=False):
 
     Returns:
         (byte string): A byte string copy, UTF-8 enccoded
-    '''
+    """
 
     python_version = sys.version_info[0]
 

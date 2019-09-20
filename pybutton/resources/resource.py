@@ -18,7 +18,7 @@ USER_AGENT = 'pybutton/{0} python/{1}'.format(VERSION, python_version())
 
 
 class Resource(object):
-    '''Abstract Base Class for managing a remote resource in our API.
+    """Abstract Base Class for managing a remote resource in our API.
 
     Includes handy methods for making HTTP calls against our API and returning
     payloads in a standardized format (namely, pybutton.Response objects).
@@ -40,14 +40,14 @@ class Resource(object):
         pybutton.ButtonClientError
         pybutton.HTTPResponseError
 
-    '''
+    """
 
     def __init__(self, api_key, config):
         self.api_key = api_key
         self.config = config
 
     def api_get(self, path, query=None):
-        '''Make an HTTP GET request
+        """Make an HTTP GET request
 
         Args:
             path (str): The path of the resource
@@ -55,11 +55,11 @@ class Resource(object):
         Returns:
             (pybutton.Response): The API response
 
-        '''
+        """
         return self._api_request(path, 'GET', query=query)
 
     def api_post(self, path, data):
-        '''Make an HTTP POST request
+        """Make an HTTP POST request
 
         Args:
             path (str): The path of the resource
@@ -68,11 +68,11 @@ class Resource(object):
         Returns:
             (pybutton.Response): The API response
 
-        '''
+        """
         return self._api_request(path, 'POST', data)
 
     def api_delete(self, path):
-        '''Make an HTTP DELETE request
+        """Make an HTTP DELETE request
 
         Args:
             path (str): The path of the resource
@@ -80,12 +80,12 @@ class Resource(object):
         Returns:
             (pybutton.Response): The API response
 
-        '''
+        """
         return self._api_request(path, 'DELETE')
 
     def _headers(self):
-        '''Generate the HTTP headers used for a request
-        '''
+        """Generate the HTTP headers used for a request
+        """
 
         api_key_bytes = '{0}:'.format(self.api_key).encode()
         authorization = b64encode(api_key_bytes).decode()
@@ -101,7 +101,7 @@ class Resource(object):
         return headers
 
     def _api_request(self, path, method, data=None, query=None):
-        '''Make an HTTP request
+        """Make an HTTP request
 
         Any data provided will be JSON encoded an included as part of the
         request body.  Additionally, an Authorization header will be set based
@@ -116,7 +116,7 @@ class Resource(object):
         Returns:
             (pybutton.Response): The API response
 
-        '''
+        """
 
         url = request_url(
             self.config['secure'],

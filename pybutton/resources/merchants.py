@@ -7,14 +7,14 @@ from pybutton.resources.resource import Resource
 
 
 class Merchants(Resource):
-    '''Manages interacting with Button Merchants via the Button API
+    """Manages interacting with Button Merchants via the Button API
 
     See Resource for class docstring.
 
-    '''
+    """
 
     def all(self, status=None, currency=None):
-        '''Get a list of merchants and their configured rates
+        """Get a list of merchants and their configured rates
 
         Args:
             status (str) optional: A status to filter by.  One of ('approved',
@@ -28,7 +28,7 @@ class Merchants(Resource):
         Returns:
             (pybutton.Response) The API response
 
-        '''
+        """
 
         query = {}
 

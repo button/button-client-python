@@ -7,7 +7,7 @@ from pybutton.request import query_dict
 
 
 class Response(object):
-    '''The Response class wraps the returned values from an API call.
+    """The Response class wraps the returned values from an API call.
 
     It exposes the response data via the `data` method and cursors for
     pagination via the `next_cursor`/`prev_cursor` methods.
@@ -16,7 +16,7 @@ class Response(object):
         meta (dict): The metadata from an API call
         response_data (dict or array<dict>): The response elements from an
             API call
-    '''
+    """
 
     classPrefix = 'class pybutton.Response'
 
@@ -25,26 +25,26 @@ class Response(object):
         self.response_data = response_data
 
     def data(self):
-        '''
+        """
         Return the raw response element(s) received from the server.
         May be a single dict or an array of dicts.
-        '''
+        """
 
         return self.response_data
 
     def next_cursor(self):
-        '''
+        """
         For paginated responses, returns the url used to fetch
         the next elements.
-        '''
+        """
 
         return self._format_cursor(self.meta.get('next'))
 
     def prev_cursor(self):
-        '''
+        """
         For paginated responses, returns the url used to fetch
         the previous elements.
-        '''
+        """
 
         return self._format_cursor(self.meta.get('prev'))
 
