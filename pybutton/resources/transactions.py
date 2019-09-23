@@ -17,10 +17,12 @@ class Transactions(Resource):
         '''Get a list of transactions.
         To paginate transactions, pass the result of response.next_cursor() as
         the cursor argument.
+        Unlike Accounts.transactions, which retrieves transactions only for a
+        single account, Transactions.all retrieves all of an organization's
+        transactions.
 
 
         Args:
-            account_id (str) optional: A Button account id ('acc-XXX')
             cursor (str) optional: An opaque string that lets you view a
                 consistent list of transactions.
             start (ISO-8601 datetime str) optional: Filter out transactions
@@ -28,7 +30,7 @@ class Transactions(Resource):
             end (ISO-8601 datetime str) optional: Filter out transactions
                 created before this time.
             time_field (str) optional: Which time field ``start`` and ``end``
-                filter on
+                filter on. Defaults to created_date.
 
         Raises:
             pybutton.ButtonClientError

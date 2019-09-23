@@ -337,7 +337,7 @@ You may pass the following optional arguments:
 
     client = Client('sk-XXX')
 
-    response = client.accounts.transactions(
+    response = client.transactions(
         start='2016-07-15T00:00:00.000Z',
         end='2016-09-30T00:00:00.000Z',
         time_field='modified_date',
