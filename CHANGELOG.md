@@ -1,4 +1,7 @@
 Current Version
+  -
+
+3.0.0 September 25, 2019
   - Update flake8 quote linting
   - Add official support for Python 3.7
   - Drop official support for Python 2.6, 3.2, 3.3
