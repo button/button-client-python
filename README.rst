@@ -115,8 +115,8 @@ All
     print(response)
     # <class pybutton.Response [2 elements]>
 
-Transactions
-''''''''''''
+Transactions (per-account)
+''''''''''''''''''''''''''
 
 Along with the required account ID, you may also
 pass the following optional arguments:
