@@ -96,6 +96,7 @@ We currently expose the following resources to manage:
 * `Orders`_
 * `Customers`_
 * `Links`_
+* `Transactions`_
 
 Accounts
 ~~~~~~~~
@@ -316,6 +317,34 @@ Get
 
     print(response)
     # <class pybutton.Response id: customer-1234, ...>
+
+Transactions
+~~~~~~~~~~~~
+
+All
+'''
+
+You may pass the following optional arguments:
+
+* ``cursor`` (string): An API cursor to fetch a specific set of results.
+* ``start`` (ISO-8601 datetime string): Fetch transactions after this time.
+* ``end`` (ISO-8601 datetime string): Fetch transactions before this time.
+* ``time_field`` (string): Which time field ``start`` and ``end`` filter on.
+
+.. code:: python
+
+    from pybutton import Client
+
+    client = Client('sk-XXX')
+
+    response = client.transactions(
+        start='2016-07-15T00:00:00.000Z',
+        end='2016-09-30T00:00:00.000Z',
+        time_field='modified_date',
+    )
+
+    print(response)
+    # <class pybutton.Response [100 elements]>
 
 Response
 --------

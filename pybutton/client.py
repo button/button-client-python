@@ -8,6 +8,7 @@ from pybutton.resources import Customers
 from pybutton.resources import Merchants
 from pybutton.resources import Orders
 from pybutton.resources import Links
+from pybutton.resources import Transactions
 from pybutton.error import ButtonClientError
 
 
@@ -57,6 +58,7 @@ class Client(object):
         self.merchants = Merchants(api_key, config)
         self.customers = Customers(api_key, config)
         self.links = Links(api_key, config)
+        self.transactions = Transactions(api_key, config)
 
 
 def config_with_defaults(config):

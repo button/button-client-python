@@ -2,6 +2,7 @@ Current Version
   - Update flake8 quote linting
   - Add official support for Python 3.7
   - Drop official support for Python 2.6, 3.2, 3.3
+  - Added `transactions` resource
 
 2.7.0 June 21, 2018
   - Added optional `time_field` argument to `client.accounts.transactions`
