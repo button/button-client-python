@@ -7,14 +7,14 @@ from pybutton.resources.resource import Resource
 
 
 class Transactions(Resource):
-    '''Manages interacting with Button Transactions via the Button API
+    """Manages interacting with Button Transactions via the Button API
 
     See Resource for class docstring.
 
-    '''
+    """
 
     def all(self, cursor=None, start=None, end=None, time_field=None):
-        '''Get a list of transactions.
+        """Get a list of transactions.
         To paginate transactions, pass the result of response.next_cursor() as
         the cursor argument.
         Unlike Accounts.transactions, which retrieves transactions only for a
@@ -38,7 +38,7 @@ class Transactions(Resource):
         Returns:
             (pybutton.Response) The API response
 
-        '''
+        """
 
         query = {}
 
