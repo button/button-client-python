@@ -4,6 +4,7 @@ from setuptools import setup
 # import, as arbitrary as it seems.
 #
 import multiprocessing  # noqa
+import pybloom_live
 
 from pybutton import VERSION
 
@@ -19,6 +20,9 @@ setup(
     author_email='support@usebutton.com',
     url='https://www.usebutton.com/developers/api-reference/',
     packages=['pybutton', 'pybutton/resources'],
+    install_requires=[
+        "pybloom_live>=3.0.0"
+    ],
     include_package_data=False,
     license='MIT',
     test_suite='nose.collector',

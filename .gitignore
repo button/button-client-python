@@ -90,3 +90,6 @@ ENV/
 
 # DS_Store
 **/.DS_Store
+
+# Private Audience
+*.buttonaudience
