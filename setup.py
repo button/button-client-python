@@ -6,12 +6,14 @@ from distutils.core import Extension
 #
 import multiprocessing  # noqa
 
+from pybutton import VERSION
+
 with open('README.rst', 'r') as f:
     long_description = f.read()
 
 setup(
     name='pybutton',
-    version='4.0.0',
+    version='VERSION',
     description='Client for the Button API',
     long_description=long_description,
     author='Button',
