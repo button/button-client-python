@@ -12,7 +12,7 @@ import hashlib
 import copy
 from struct import unpack, pack, calcsize
 
-from pybutton.resources.private_audience.utils import range_fn, is_string_io, running_python_3
+from pybutton.resources.private_audience.model.utils import range_fn, is_string_io, running_python_3
 from pybutton.resources.private_audience.bitarray import bitarray
 
 
