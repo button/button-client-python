@@ -20,14 +20,16 @@ class PrivateAudience(Resource):
         return 'success'
 
     def evaluate(self, identifier):
-        hashed_identifier = hashlib.sha256(identifier.lower().strip())
+        identifier_clean = identifier.encode('utf-8').lower().strip()
+        hashed_identifier = hashlib.sha256(identifier_clean)
         hashed_identifier.update(self.config['private_audience_secret'])
         return hashed_identifier.hexdigest() in self.private_audience_loaded
 
     def match(self, match_list):
         return_list = []
         for m in match_list:
-            hashed_identifier = hashlib.sha256(m.lower().strip())
+            m_clean = m.encode('utf-8').lower().strip()
+            hashed_identifier = hashlib.sha256(m_clean)
             hashed_identifier.update(self.config['private_audience_secret'])
             if hashed_identifier.hexdigest() in self.private_audience_loaded:
                 return_list.append(m)
@@ -37,7 +39,8 @@ class PrivateAudience(Resource):
         # Initialize Bloom Filter
         f = pl.BloomFilter(capacity=len(identifier_list), error_rate=error_rt)
         for m in identifier_list:
-            hashed_identifier = hashlib.sha256(m.lower().strip())
+            m_clean = m.encode('utf-8').lower().strip()
+            hashed_identifier = hashlib.sha256(m_clean)
             hashed_identifier.update(self.config['private_audience_secret'])
             f.add(hashed_identifier.hexdigest())
         with open(audience_name + '.buttonaudience', 'wb') as fp:
