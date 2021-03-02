@@ -73,4 +73,5 @@ def config_with_defaults(config):
         'hostname': config.get('hostname', 'api.usebutton.com'),
         'port': config.get('port', defaultPort),
         'api_version': config.get('api_version'),
+        'private_audience_secret': config.get('private_audience_secret')
     }

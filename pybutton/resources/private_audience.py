@@ -15,17 +15,26 @@ from pybutton.error import ButtonClientError
 
 class PrivateAudience(Resource):
 
-    def _validateEnvironment(self):
+    def _validateEnvironment(self, requires_model):
         try:
             pl
         except:
             raise ButtonClientError((
-                'pybloom_live is required for Button Private Audiences'
+                'pybloom_live=3.0.0 is required for Button Private Audiences. '
+                'Run `pip install pybloom_live` to install.'
             ))
         if not self.config['private_audience_secret']:
             raise ButtonClientError((
-                'Audience secret is not set in the config'
+                'Your private audience secret must be set in the config as '
+                '`private_audience_secret`.'
             ))
+        if requires_model:
+            try:
+                self.private_audience_loaded
+            except:
+                raise ButtonClientError((
+                    'A private audience file has not yet been loaded.'
+                ))
 
     def _cleanAndHashIdentifier(self, identifier):
         try:
@@ -38,18 +47,18 @@ class PrivateAudience(Resource):
             return None
 
     def load(self, filename):
-        self._validateEnvironment()
+        self._validateEnvironment(False)
         with open(filename, 'rb') as fp:
             self.private_audience_loaded = pl.BloomFilter.fromfile(fp)
         return 'success'
 
     def evaluate(self, identifier):
-        self._validateEnvironment()
+        self._validateEnvironment(True)
         hashed_id = self._cleanAndHashIdentifier(identifier)
         return hashed_id in self.private_audience_loaded
 
     def match(self, match_list):
-        self._validateEnvironment()
+        self._validateEnvironment(True)
         return_list = []
         for m in match_list:
             hashed_id = self._cleanAndHashIdentifier(m)
@@ -58,7 +67,7 @@ class PrivateAudience(Resource):
         return return_list
 
     def create(self, audience_name, identifier_list, error_rt=0.00001):
-        self._validateEnvironment()
+        self._validateEnvironment(False)
         # Initialize Bloom Filter
         f = pl.BloomFilter(capacity=len(identifier_list), error_rate=error_rt)
         for m in identifier_list:

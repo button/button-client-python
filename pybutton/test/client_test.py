@@ -45,6 +45,7 @@ class ClientTestCase(TestCase):
             'secure': True,
             'timeout': None,
             'api_version': None,
+            'private_audience_secret': None,
         })
 
         # Port and timeout overrides
@@ -59,6 +60,7 @@ class ClientTestCase(TestCase):
             'secure': True,
             'timeout': 5,
             'api_version': None,
+            'private_audience_secret': None,
         })
 
         # Hostname and secure overrides
@@ -73,6 +75,7 @@ class ClientTestCase(TestCase):
             'secure': False,
             'timeout': None,
             'api_version': None,
+            'private_audience_secret': None,
         })
 
         config = config_with_defaults({
@@ -85,4 +88,5 @@ class ClientTestCase(TestCase):
             'secure': True,
             'timeout': None,
             'api_version': '2017-01-01',
+            'private_audience_secret': None,
         })
