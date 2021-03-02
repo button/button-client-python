@@ -2,8 +2,12 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
-import pybloom_live as pl
 import hashlib
+
+try:
+    import pybloom_live as pl
+except:
+    pass
 
 from pybutton.resources.resource import Resource
 
