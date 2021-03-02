@@ -22,7 +22,8 @@ class PrivateAudience(Resource):
     def evaluate(self, identifier):
         identifier_clean = identifier.encode('utf-8').lower().strip()
         hashed_identifier = hashlib.sha256(identifier_clean)
-        hashed_identifier.update(self.config['private_audience_secret'])
+        secret = self.config['private_audience_secret'].encode('utf-8')
+        hashed_identifier.update(secret)
         return hashed_identifier.hexdigest() in self.private_audience_loaded
 
     def match(self, match_list):
@@ -30,7 +31,8 @@ class PrivateAudience(Resource):
         for m in match_list:
             m_clean = m.encode('utf-8').lower().strip()
             hashed_identifier = hashlib.sha256(m_clean)
-            hashed_identifier.update(self.config['private_audience_secret'])
+            secret = self.config['private_audience_secret'].encode('utf-8')
+            hashed_identifier.update(secret)
             if hashed_identifier.hexdigest() in self.private_audience_loaded:
                 return_list.append(m)
         return return_list
@@ -41,7 +43,8 @@ class PrivateAudience(Resource):
         for m in identifier_list:
             m_clean = m.encode('utf-8').lower().strip()
             hashed_identifier = hashlib.sha256(m_clean)
-            hashed_identifier.update(self.config['private_audience_secret'])
+            secret = self.config['private_audience_secret'].encode('utf-8')
+            hashed_identifier.update(secret)
             f.add(hashed_identifier.hexdigest())
         with open(audience_name + '.buttonaudience', 'wb') as fp:
             f.tofile(fp)
