@@ -7,13 +7,13 @@ from unittest import TestCase
 
 from pybutton.resources import PrivateAudience
 
-config = {}
-
 
 class PrivateAudienceTestCase(TestCase):
 
         def test_create_audience(self):
-            private_audience = PrivateAudience('sk-XXX', config)
+            private_audience = PrivateAudience('sk-XXX', {
+                'private_audience_secret': 'hello'
+            })
             response = private_audience.create(
                 'test_audience',
                 ['bloop', 'blip']
@@ -21,7 +21,9 @@ class PrivateAudienceTestCase(TestCase):
             self.assertEqual(response, 'success')
 
         def test_load_and_evaluate_audience(self):
-            private_audience = PrivateAudience('sk-XXX', config)
+            private_audience = PrivateAudience('sk-XXX', {
+                'private_audience_secret': 'hello'
+            })
             response = private_audience.load('test_audience.buttonaudience')
             self.assertEqual(response, 'success')
             self.assertEqual(private_audience.evaluate('bloop'), True)
@@ -30,7 +32,9 @@ class PrivateAudienceTestCase(TestCase):
                 ['bloop', 'blip', 'bloom']), ['bloop', 'blip'])
 
         def test_load_and_evaluate_audience_wrong_key(self):
-            private_audience = PrivateAudience('sk-YYY', config)
+            private_audience = PrivateAudience('sk-YYY', {
+                'private_audience_secret': 'world'
+            })
             response = private_audience.load('test_audience.buttonaudience')
             self.assertEqual(response, 'success')
             self.assertEqual(private_audience.evaluate('bloop'), False)
