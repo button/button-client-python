@@ -4,11 +4,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 import hashlib
 
-try:
-    import pybloom_live as pl
-except:
-    pass
-
+from pybutton.resources.private_audience.model.model import PrivateAudienceModel  # noqa: E501
 from pybutton.resources.resource import Resource
 from pybutton.error import ButtonClientError
 
@@ -16,13 +12,6 @@ from pybutton.error import ButtonClientError
 class PrivateAudience(Resource):
 
     def _validateEnvironment(self, requires_model):
-        try:
-            pl
-        except:
-            raise ButtonClientError((
-                'pybloom_live=3.0.0 is required for Button Private Audiences. '
-                'Run `pip install pybloom_live` to install.'
-            ))
         if not self.config['private_audience_secret']:
             raise ButtonClientError((
                 'Your private audience secret must be set in the config as '
@@ -49,7 +38,7 @@ class PrivateAudience(Resource):
     def load(self, filename):
         self._validateEnvironment(False)
         with open(filename, 'rb') as fp:
-            self.private_audience_loaded = pl.BloomFilter.fromfile(fp)
+            self.private_audience_loaded = PrivateAudienceModel.fromfile(fp)
         return 'success'
 
     def evaluate(self, identifier):
@@ -69,7 +58,7 @@ class PrivateAudience(Resource):
     def create(self, audience_name, identifier_list, error_rt=0.00001):
         self._validateEnvironment(False)
         # Initialize Bloom Filter
-        f = pl.BloomFilter(capacity=len(identifier_list), error_rate=error_rt)
+        f = PrivateAudienceModel(capacity=len(identifier_list), error_rate=error_rt)  # noqa: E501
         for m in identifier_list:
             hashed_id = self._cleanAndHashIdentifier(m)
             if hashed_id:

@@ -1,6 +1,9 @@
 Current Version
   -
 
+4.0.0 March 2, 2021
+ - Added Button Private Audience resource
+
 3.0.0 September 25, 2019
   - Update flake8 quote linting
   - Add official support for Python 3.7

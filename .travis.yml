@@ -7,5 +7,4 @@ python:
   - "3.7"
 install:
   - "pip install flake8==3.3.0"
-  - "pip install pybloom_live==3.0.0"
 script: python setup.py test
