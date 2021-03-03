@@ -1,18 +1,17 @@
 from setuptools import setup
+from distutils.core import Extension
 
 # Python 2.6 will error exiting nosetests via multiprocessing without this
 # import, as arbitrary as it seems.
 #
 import multiprocessing  # noqa
 
-from pybutton import VERSION
-
 with open('README.rst', 'r') as f:
     long_description = f.read()
 
 setup(
     name='pybutton',
-    version=VERSION,
+    version='4.0.0',
     description='Client for the Button API',
     long_description=long_description,
     author='Button',
@@ -37,5 +36,9 @@ setup(
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Topic :: Software Development :: Libraries :: Python Modules",
-    ]
+    ],
+    ext_modules = [Extension(name = "pybutton.resources.private_audience.bitarray._bitarray",
+                             sources = ["pybutton/resources/private_audience/bitarray/_bitarray.c"]),
+                   Extension(name = "pybutton.resources.private_audience.bitarray._util",
+                             sources = ["pybutton/resources/private_audience/bitarray/_util.c"])],
 )
